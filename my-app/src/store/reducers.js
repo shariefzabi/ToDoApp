@@ -1,4 +1,5 @@
 const reduxState = { count: 1 };
+const userData ={'zabiullahshariefmohammed@gmail.com':'Zabi123'}
 const students = [
   {
     name: "zabiullah",
@@ -33,6 +34,16 @@ export function studentReducer(state = students, action) {
     case 'removestudent':
       const studentArray = state.slice(0, state.length - 1)
       return studentArray;
+    default:
+      return state;
+  }
+}
+export function ToDoReducer(state = userData, action) {
+  switch (action.type) {
+    case 'addUSer':
+      const {payload} =action
+      return {...state,...payload }
+   
     default:
       return state;
   }

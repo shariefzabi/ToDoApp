@@ -1,5 +1,5 @@
 const reduxState = { count: 1 };
-const userData ={'zabiullahshariefmohammed@gmail.com':'Zabi123'}
+const userData = { users: { 'zabiullahshariefmohammed@gmail.com': 'Zabi123' }, currentUser: 'zabi' }
 const students = [
   {
     name: "zabiullah",
@@ -14,6 +14,7 @@ const students = [
     marks: 80
   }
 ];
+const todos = {}
 export function reducer1(state = reduxState, action) {
 
   switch (action.type) {
@@ -38,13 +39,47 @@ export function studentReducer(state = students, action) {
       return state;
   }
 }
-export function ToDoReducer(state = userData, action) {
+export function userReduce(state = userData, action) {
+  const payload = action?.payload
   switch (action.type) {
     case 'addUSer':
-      const {payload} =action
-      return {...state,...payload }
-   
+      const user = { ...state.users, ...{ [payload.email]: payload.password } }
+      return { ...state, users: user };
+
+    case 'setUser':
+
+      return { ...state, currentUser: payload }
+
     default:
       return state;
   }
 }
+
+export function toDoReducer(state = todos, action) {
+
+  const currentUser = action?.payload?.currentUser;
+  const todo = action?.payload?.todo?.[currentUser];
+  console.log(todo)
+  console.log(state)
+  switch (action.type) {
+
+    case 'addTodo':
+
+      const existingUser = Object.keys(state).includes(currentUser)
+      if (existingUser) {
+        const existingTodo = Object.assign([], state[currentUser])
+        existingTodo.push(todo)
+        return { ...state, [currentUser]: existingTodo }
+      }
+      else {
+
+        return { ...state, [currentUser]: [todo] }
+      }
+
+    default:
+      return state;
+  }
+}
+
+
+

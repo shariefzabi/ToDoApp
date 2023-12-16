@@ -1,17 +1,21 @@
 // LoginPage.js
 import React, { useState } from 'react';
-import {useNavigate,Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 
 const LoginPage = () => {
-  const userData = useSelector((state) => state.ToDoReducer);
+
+  const userData = useSelector((state) => state.userReduce.users);
+  const dispatch = useDispatch()
+  console.log(userData)
   const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    if (Object.keys(userData).includes(email) && userData[email]===password ) {
+    if (Object.keys(userData).includes(email) && userData[email] === password) {
+      dispatch({ type: 'setUser', payload: email })
       navigate('/todo');
     } else {
       alert('Invalid email or password');

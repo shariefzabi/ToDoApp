@@ -55,7 +55,7 @@ const TodoForm = () => {
         <div className="container mt-5">
             <h2>ToDo Form</h2>
             <form onSubmit={handleSubmit}>
-                <div className="mb-3">
+                <div className="mb-1">
                     <label htmlFor="task" className="form-label">
                         Task <span style={{ fontSize: '20px' }} className='text-danger'>*</span>
                     </label>
@@ -74,7 +74,7 @@ const TodoForm = () => {
                     {errors.task && <div className="text-danger">{errors.task}</div>}
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-1">
                     <label htmlFor="description" className="form-label">
                         Description <span style={{ fontSize: '20px' }} className='text-danger'>*</span>
                     </label>
@@ -92,7 +92,7 @@ const TodoForm = () => {
                         <div className="text-danger">{errors.description}</div>
                     )}
                 </div>
-                <div className="mb-3">
+                <div className="mb-1">
                     <label htmlFor="category" className="form-label">
                         Category <span style={{ fontSize: '20px' }} className='text-danger'>*</span>
                     </label>
@@ -112,7 +112,7 @@ const TodoForm = () => {
                     )}
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-1">
                     <label htmlFor="dueDate" className="form-label">
                         Due Date <span style={{ fontSize: '20px' }} className='text-danger'>*</span>
                     </label>
@@ -129,7 +129,7 @@ const TodoForm = () => {
                     />
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-1">
                     <label htmlFor="priority" className="form-label">
                         Priority <span style={{ fontSize: '20px' }} className='text-danger'>*</span>
                     </label>
@@ -148,7 +148,7 @@ const TodoForm = () => {
                         <option value="high">High</option>
                     </select>
                 </div>
-                <div className="mb-3">
+                <div className="mb-1">
                     <label htmlFor="assignee" className="form-label">
                         Assignee <span style={{ fontSize: '20px' }} className='text-danger'>*</span>
                     </label>
@@ -168,7 +168,7 @@ const TodoForm = () => {
                     )}
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-1">
                     <label htmlFor="status" className="form-label">
                         Status <span style={{ fontSize: '20px' }} className='text-danger'>*</span>
                     </label>
@@ -188,7 +188,7 @@ const TodoForm = () => {
                     )}
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-1">
                     <label htmlFor="notes" className="form-label">
                         Notes
                     </label>

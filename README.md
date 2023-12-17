@@ -27,7 +27,7 @@ afer succesfully completing the above steps the application should start on port
 1)register as a  new user with a  valid email and password 
 2) login with same email and password
 3)after login it will redirects the user to add toDo page ,here the user can create a Todo 
-3)after creating todo click on view Todo to view the created ToDos
+3)after creating todo click on view Todo to view  and edit and delete  the created ToDos
 5) the user can also sign in with different emails and password,todos are isolated between different users
 
 `Happy TODOing`

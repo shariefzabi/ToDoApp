@@ -1,5 +1,5 @@
 // SignupPage.js
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 const SignupPage = () => {
@@ -11,27 +11,28 @@ const SignupPage = () => {
   const [isExistingUser, setIsExistingUser] = useState(false);
   const [errors, setErrors] = useState({ email: '', password: '' });
 
-  const validateEmail = (email) => {
+  const validateEmail = useCallback((email) => {
     // Basic email validation regex pattern
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(email);
-  };
+  }, []);
 
   const validatePassword = (password) => {
     const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$/;
     return passwordPattern.test(password);
   };
 
-  const checkIfExistingUser = () => {
+  const checkIfExistingUser = useCallback(() => {
     if (userData && Object.keys(userData).includes(email)) {
       setIsExistingUser(true);
     }
 
-  }
+  }, [userData, email])
 
   const handleSignup = () => {
     const emailIsValid = validateEmail(email);
     const passwordIsValid = validatePassword(password);
+    console.log(password)
 
     if (!emailIsValid) {
       setErrors((prevErrors) => ({

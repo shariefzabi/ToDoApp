@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 const TodoForm = () => {
@@ -20,7 +20,7 @@ const TodoForm = () => {
         notes: '',
     });
 
-    const errorHandler = (e) => {
+    const errorHandler = useCallback((e) => {
         const maxLength = 50;
         const minLength = 8;
         console.log('value', e.target.value, e.target.value.length)
@@ -29,7 +29,7 @@ const TodoForm = () => {
         else {
             setErrors({ ...errors, [e.target.id]: '' })
         }
-    }
+    }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault();

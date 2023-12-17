@@ -9,26 +9,26 @@ const TodoForm = () => {
     const storeTodos = useSelector((state) => state?.toDoReducer)?.[currentUser]
     const [todos, setTodos] = useState(storeTodos)
     const dispatch = useDispatch()
-    const handleModalOpen = (e) => {
+    const handleModalOpen = useCallback((e) => {
         const { id } = e.target
         const modal = document.getElementById(`Modal-${id}`);
         if (modal) {
             modal.style.display = 'block';
         }
         document.body.classList.add('custom-backdrop');
-    };
-    const deleteHandler = (e) => {
+    }, []);
+    const deleteHandler = useCallback((e) => {
         const index = e.target.id.split('-index-')[1]
         console.log('index', index)
         const newTodo = Object.assign([], todos)
         newTodo.splice(index, 1)
         setDisableSave(false)
         setTodos(newTodo)
-    }
-    function refreshHandler() {
+    }, [todos])
+    const refreshHandler = useCallback(function () {
         setDisableSave(true)
         setTodos(storeTodos)
-    }
+    }, [storeTodos])
     const saveHandler = useCallback(() => {
         dispatch({ type: 'ModifyTodo', payload: { todos, currentUser } })
     }, [todos])
@@ -48,6 +48,7 @@ const TodoForm = () => {
                         <div style={{ textAlign: 'end' }}>
                             <button onClick={() => {
                                 saveHandler()
+                                setDisableSave(true)
                                 alert('todo Saved  succesfully')
                             }} disabled={disableSave} className='btn btn-success mr-2'>Save</button>
                             <button onClick={() => refreshHandler()} className='btn btn-primary mr-2'>refresh</button>
@@ -57,10 +58,10 @@ const TodoForm = () => {
                                 const id = `${uuidv4()}-index-${index}`
                                 return (
                                     <div className="todo mb-2 mt-1" key={id}>
-                                        <h4>taskName:{ele.task}</h4>
+                                        <h4 className='taskName'>taskName:{ele.task}</h4>
                                         <div style={{ textAlign: 'end' }}>
-                                            <button id={index} className='btn btn-primary' onClick={handleModalOpen}>View/Edit</button>
-                                            <button id={id} onClick={deleteHandler} className='btn btn-danger'>delete</button>
+                                            <button id={index} className='btn btn-primary mr-2' onClick={handleModalOpen}>View/Edit</button>
+                                            <button id={id} onClick={deleteHandler} className='btn btn-danger mr-2'>delete</button>
                                         </div>
                                         <Modal index={index} modalTodo={ele} setTodos={setTodos}></Modal>
                                     </div>
@@ -95,13 +96,13 @@ const TodoForm = () => {
             notes: '',
         });
         console.log()
-        const handleModalClose = () => {
+        const handleModalClose = useCallback(() => {
             const modal = document.getElementById(`Modal-${index}`);
             if (modal) {
                 modal.style.display = 'none';
             }
             document.body.classList.remove('custom-backdrop');
-        };
+        }, []);
         const handleSubmit = (e) => {
             e.preventDefault();
             // Validation logic for each field
@@ -124,7 +125,7 @@ const TodoForm = () => {
                 handleModalClose()
             }
         };
-        const errorHandler = (e) => {
+        const errorHandler = useCallback((e) => {
             const maxLength = 50;
             const minLength = 8;
             console.log('value', e.target.value, e.target.value.length)
@@ -133,7 +134,7 @@ const TodoForm = () => {
             else {
                 setErrors({ ...errors, [e.target.id]: '' })
             }
-        }
+        }, [])
         return (
             <div className="modal" id={`Modal-${index}`} tabIndex="-1" role="dialog">
                 <div className="modal-dialog" role="document">
@@ -150,7 +151,7 @@ const TodoForm = () => {
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div className="modal-body">
+                        <div className=" verticalScrollbar modal-body">
                             <form onSubmit={handleSubmit}>
                                 <div className="mb-3">
                                     <label htmlFor="task" className="form-label">
@@ -313,7 +314,6 @@ const TodoForm = () => {
                             >
                                 Close
                             </button>
-                            {/* Add your other buttons or form elements */}
                         </div>
                     </div>
                 </div>

@@ -15,53 +15,25 @@ const TodoForm = () => {
     const [errors, setErrors] = useState({
         task: '',
         description: '',
-        dueDate: '',
-        priority: '',
         assignee: '',
         status: '',
         notes: '',
     });
 
+    const errorHandler = (e) => {
+        const maxLength = 50;
+        const minLength = 8;
+        console.log('value', e.target.value, e.target.value.length)
+        if (minLength > e.target.value.trim().length || e.target.value.trim().length > maxLength)
+            setErrors({ ...errors, [e.target.id]: `${e.target.id} length should be greater than 8 and less tha 50` })
+        else {
+            setErrors({ ...errors, [e.target.id]: '' })
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Validation logic for each field
-        const validationErrors = {};
-
-        if (!task.trim()) {
-            validationErrors.task = 'Task is required';
-        }
-
-        if (!description.trim()) {
-            validationErrors.description = 'Description is required';
-        }
-
-        if (!dueDate.trim()) {
-            validationErrors.dueDate = 'Due Date is required';
-        }
-
-        if (!priority.trim()) {
-            validationErrors.priority = 'Priority is required';
-        }
-
-        if (!assignee.trim()) {
-            validationErrors.assignee = 'Assignee is required';
-        }
-
-        if (!status.trim()) {
-            validationErrors.status = 'Status is required';
-        }
-
-        if (!category.trim()) {
-            validationErrors.category = 'Category is required';
-        }
-
-        // Set errors if any field is empty
-        if (Object.keys(validationErrors).length > 0) {
-            setErrors(validationErrors);
-            return;
-        }
-        else {
-
+        if (Object.values(errors).every(ele => ele.length === 0)) {
             console.log('came')
             const todo = {
                 task,
@@ -75,13 +47,12 @@ const TodoForm = () => {
             }
             dispatch({ type: 'addTodo', payload: { todo: { [currentUser]: todo }, currentUser } })
             alert('todo created succesfully')
+
+            return;
         }
-
-
         // If all validations pass, submit the form
 
     };
-
     return (
         <div className="container mt-5">
             <h2>ToDo Form</h2>
@@ -91,11 +62,16 @@ const TodoForm = () => {
                         Task <span style={{ fontSize: '20px' }} className='text-danger'>*</span>
                     </label>
                     <input
+                        required
                         type="text"
                         className="form-control"
                         id="task"
                         value={task}
-                        onChange={(e) => setTask(e.target.value)}
+                        onChange={(e) => {
+                            errorHandler(e)
+                            setTask(e.target.value)
+                        }
+                        }
                     />
                     {errors.task && <div className="text-danger">{errors.task}</div>}
                 </div>
@@ -105,10 +81,14 @@ const TodoForm = () => {
                         Description <span style={{ fontSize: '20px' }} className='text-danger'>*</span>
                     </label>
                     <textarea
+                        required
                         className="form-control"
                         id="description"
                         value={description}
-                        onChange={(e) => setDescription(e.target.value)}
+                        onChange={(e) => {
+                            errorHandler(e)
+                            setDescription(e.target.value)
+                        }}
                     ></textarea>
                     {errors.description && (
                         <div className="text-danger">{errors.description}</div>
@@ -119,11 +99,15 @@ const TodoForm = () => {
                         Category <span style={{ fontSize: '20px' }} className='text-danger'>*</span>
                     </label>
                     <input
+                        required
                         type="text"
                         className="form-control"
                         id="category"
                         value={category}
-                        onChange={(e) => setCategory(e.target.value)}
+                        onChange={(e) => {
+                            errorHandler(e)
+                            setCategory(e.target.value)
+                        }}
                     />
                     {errors.category && (
                         <div className="text-danger">{errors.category}</div>
@@ -135,15 +119,16 @@ const TodoForm = () => {
                         Due Date <span style={{ fontSize: '20px' }} className='text-danger'>*</span>
                     </label>
                     <input
+                        required
                         type="date"
                         className="form-control"
                         id="dueDate"
                         value={dueDate}
-                        onChange={(e) => setDueDate(e.target.value)}
+                        onChange={(e) => {
+                            setDueDate(e.target.value)
+                        }
+                        }
                     />
-                    {errors.dueDate && (
-                        <div className="text-danger">{errors.dueDate}</div>
-                    )}
                 </div>
 
                 <div className="mb-3">
@@ -151,30 +136,35 @@ const TodoForm = () => {
                         Priority <span style={{ fontSize: '20px' }} className='text-danger'>*</span>
                     </label>
                     <select
+                        required
                         className="form-control"
                         id="priority"
                         value={priority}
-                        onChange={(e) => setPriority(e.target.value)}
+                        onChange={(e) => {
+
+                            setPriority(e.target.value)
+                        }}
                     >
                         <option value="">Select Priority</option>
                         <option value="low">Low</option>
                         <option value="medium">Medium</option>
                         <option value="high">High</option>
                     </select>
-                    {errors.priority && (
-                        <div className="text-danger">{errors.priority}</div>
-                    )}
                 </div>
                 <div className="mb-3">
                     <label htmlFor="assignee" className="form-label">
                         Assignee <span style={{ fontSize: '20px' }} className='text-danger'>*</span>
                     </label>
                     <input
+                        required
                         type="text"
                         className="form-control"
                         id="assignee"
                         value={assignee}
-                        onChange={(e) => setAssignee(e.target.value)}
+                        onChange={(e) => {
+                            errorHandler(e)
+                            setAssignee(e.target.value)
+                        }}
                     />
                     {errors.assignee && (
                         <div className="text-danger">{errors.assignee}</div>
@@ -186,11 +176,15 @@ const TodoForm = () => {
                         Status <span style={{ fontSize: '20px' }} className='text-danger'>*</span>
                     </label>
                     <input
+                        required
                         type="text"
                         className="form-control"
                         id="status"
                         value={status}
-                        onChange={(e) => setStatus(e.target.value)}
+                        onChange={(e) => {
+                            errorHandler(e)
+                            setStatus(e.target.value)
+                        }}
                     />
                     {errors.status && (
                         <div className="text-danger">{errors.status}</div>

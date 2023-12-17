@@ -1,0 +1,9 @@
+.custom-backdrop {
+
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Light gray background color */
+}
+
+.todo {
+    background-color: rgba(4, 128, 121, 0.4);
+}

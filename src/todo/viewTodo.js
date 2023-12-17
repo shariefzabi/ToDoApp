@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom'
 import './viewTodo.css'
 import { v4 as uuidv4 } from 'uuid';
 
@@ -75,7 +76,7 @@ const TodoForm = () => {
             );
         }
         else {
-            return <h2>No Todos ,add Todos</h2>
+            return <h2>No Todos ,<Link to='/todo'>add Todos</Link></h2>
         }
     }
     function Modal({ modalTodo, index, setTodos }) {

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './viewTodo.css'
 import { v4 as uuidv4 } from 'uuid';

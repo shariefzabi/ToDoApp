@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const LoginPage = () => {
 
-  const userData = useSelector((state) => state.userReduce.users);
+  const userData = useSelector((state) => state?.userReduce?.users);
   const dispatch = useDispatch()
   console.log(userData)
   const [email, setemail] = useState('');
@@ -14,7 +14,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    if (Object.keys(userData).includes(email) && userData[email] === password) {
+    if (userData && Object.keys(userData).includes(email) && userData[email] === password) {
       dispatch({ type: 'setUser', payload: email })
       navigate('/todo');
     } else {

@@ -6,7 +6,7 @@ const SignupPage = () => {
   const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.userReduce.users);
+  const userData = useSelector((state) => state?.userReduce?.users);
   const dispatch = useDispatch()
   const [isExistingUser, setIsExistingUser] = useState(false);
   const [errors, setErrors] = useState({ email: '', password: '' });
@@ -23,8 +23,7 @@ const SignupPage = () => {
   };
 
   const checkIfExistingUser = () => {
-    console.log('came', email)
-    if (Object.keys(userData).includes(email)) {
+    if (userData && Object.keys(userData).includes(email)) {
       setIsExistingUser(true);
     }
 

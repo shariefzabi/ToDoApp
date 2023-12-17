@@ -1,5 +1,5 @@
 const reduxState = { count: 1 };
-const userData = { users: { 'zabiullahshariefmohammed@gmail.com': 'Zabi123' }, currentUser: 'zabi' }
+const userData = {}
 const students = [
   {
     name: "zabiullah",

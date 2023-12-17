@@ -39,7 +39,7 @@ export default function Todo() {
                     </li>
                     <div className='col-6 profileWrapper m-2'>
                         <div className='profile'>{user}</div>
-                        <Link className='pl-1' to='/'>Sign out</Link>
+                        <Link className='pl-1 signOut' to='/'>Sign out</Link>
                     </div>
                 </ul>
                 <Routes>

@@ -55,3 +55,13 @@
 .profileWrapper {
     text-align: end;
 }
+
+.signOut {
+    text-decoration: none;
+    color: white;
+}
+
+.signOut:hover {
+    background-color: #555;
+
+}

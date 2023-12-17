@@ -30,7 +30,7 @@ const LoginPage = () => {
           <label htmlFor="email" className="form-label">email</label>
           <input
             type="text"
-            className="form-control col-md-6"
+            className="form-control col-md-4"
             id="email"
             value={email}
             onChange={(e) => setemail(e.target.value)}
@@ -40,20 +40,24 @@ const LoginPage = () => {
           <label htmlFor="password" className="form-label">Password</label>
           <input
             type="password"
-            className="form-control col-md-6"
+            className="form-control col-md-4"
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <button type="button" className="btn btn-primary" onClick={handleLogin}>Login</button>
-        <p className="mt-3">
-          New user?{' '}
-          <Link to="/signup" className="btn btn-link">
-            Sign Up
-          </Link>
-        </p>
-
+        <div className='row'>
+          <p className="col-2">
+            New user?{' '}
+            <Link to="/signup" className="btn btn-link">
+              Sign Up
+            </Link>
+          </p>
+          <p style={{ textAlign: 'end' }} className="col-2 mt-2">
+            <Link to="/forgotPassword"> forgot password?{' '}</Link>
+          </p>
+        </div>
       </form>
     </div>
   );

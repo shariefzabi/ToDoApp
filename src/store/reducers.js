@@ -11,6 +11,10 @@ export function userReduce(state = userData, action) {
 
       return { ...state, currentUser: payload }
 
+    case 'changePassword':
+      const ModifiedUser = { ...state.users, ...{ [payload.email]: payload.newPassword } }
+      return { ...state, users: ModifiedUser };
+
     default:
       return state;
   }

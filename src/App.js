@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import LoginPage from './components/login.js';
 import SignupPage from './components/signup.js';
 import Todo from './todo/todo.js';
+import ResetPassword from './components/ResetPassWord.js';
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
           < Routes>
             <Route path="/" element={<LoginPage></LoginPage>} />
             <Route path="/signup" element={<SignupPage></SignupPage>} />
+            <Route path="/forgotPassword" element={<ResetPassword></ResetPassword>} />
             <Route path="/todo/*" element={<Todo></Todo>} />
 
 

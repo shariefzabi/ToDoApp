@@ -59,7 +59,7 @@ const TodoForm = () => {
                                 const id = `${uuidv4()}-index-${index}`
                                 return (
                                     <div className="todo mb-2 mt-1" key={id}>
-                                        <h4 className='taskName'>taskName:{ele.task}</h4>
+                                        <p className='taskName'>taskName:{ele.task}</p>
                                         <div style={{ textAlign: 'end' }}>
                                             <button id={index} className='btn btn-primary mr-2' onClick={handleModalOpen}>View/Edit</button>
                                             <button id={id} onClick={deleteHandler} className='btn btn-danger mr-2'>delete</button>

@@ -23,7 +23,6 @@ const TodoForm = () => {
     const errorHandler = useCallback((e) => {
         const maxLength = 50;
         const minLength = 8;
-        console.log('value', e.target.value, e.target.value.length)
         if (minLength > e.target.value.trim().length || e.target.value.trim().length > maxLength)
             setErrors({ ...errors, [e.target.id]: `${e.target.id} length should be greater than 8 and less tha 50` })
         else {
@@ -34,7 +33,6 @@ const TodoForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (Object.values(errors).every(ele => ele.length === 0)) {
-            console.log('came')
             const todo = {
                 task,
                 description,

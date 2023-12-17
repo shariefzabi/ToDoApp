@@ -32,8 +32,6 @@ const SignupPage = () => {
   const handleSignup = () => {
     const emailIsValid = validateEmail(email);
     const passwordIsValid = validatePassword(password);
-    console.log(password)
-
     if (!emailIsValid) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -77,7 +75,7 @@ const SignupPage = () => {
           <label htmlFor="email" className="form-label">email</label>
           <input
             type="text"
-            className="form-control col-md-6"
+            className="form-control col-md-4"
             id="email"
             value={email}
             onChange={(e) => setemail(e.target.value)}
@@ -91,7 +89,7 @@ const SignupPage = () => {
           <label htmlFor="password" className="form-label">Password</label>
           <input
             type="password"
-            className="form-control col-md-6"
+            className="form-control col-md-4"
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

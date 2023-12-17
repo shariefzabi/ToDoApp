@@ -25,9 +25,6 @@ export function toDoReducer(state = todos, action) {
   const currentUser = action?.payload?.currentUser;
   const todo = action?.payload?.todo?.[currentUser];
   const payload = action?.payload;
-
-  console.log('todo', todo)
-  console.log('state', state)
   switch (action.type) {
 
     case 'addTodo':

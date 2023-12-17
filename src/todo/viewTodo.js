@@ -20,7 +20,6 @@ const TodoForm = () => {
     }, []);
     const deleteHandler = useCallback((e) => {
         const index = e.target.id.split('-index-')[1]
-        console.log('index', index)
         const newTodo = Object.assign([], todos)
         newTodo.splice(index, 1)
         setDisableSave(false)
@@ -80,7 +79,6 @@ const TodoForm = () => {
         }
     }
     function Modal({ modalTodo, index, setTodos }) {
-        console.log('myPropss', modalTodo)
         const [task, setTask] = useState(modalTodo.task);
         const [description, setDescription] = useState(modalTodo.description);
         const [dueDate, setDueDate] = useState(modalTodo.dueDate);
@@ -96,7 +94,6 @@ const TodoForm = () => {
             status: '',
             notes: '',
         });
-        console.log()
         const handleModalClose = useCallback(() => {
             const modal = document.getElementById(`Modal-${index}`);
             if (modal) {
@@ -108,7 +105,6 @@ const TodoForm = () => {
             e.preventDefault();
             // Validation logic for each field
             if (Object.values(errors).every(ele => ele.length === 0)) {
-                console.log('came')
                 const todo = {
                     task,
                     description,
@@ -129,7 +125,6 @@ const TodoForm = () => {
         const errorHandler = useCallback((e) => {
             const maxLength = 50;
             const minLength = 8;
-            console.log('value', e.target.value, e.target.value.length)
             if (minLength > e.target.value.trim().length || e.target.value.trim().length > maxLength)
                 setErrors({ ...errors, [e.target.id]: `${e.target.id} length should be greater than 8 and less tha 50` })
             else {

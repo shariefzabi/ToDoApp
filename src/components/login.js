@@ -8,7 +8,6 @@ const LoginPage = () => {
 
   const userData = useSelector((state) => state?.userReduce?.users);
   const dispatch = useDispatch()
-  console.log(userData)
   const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();

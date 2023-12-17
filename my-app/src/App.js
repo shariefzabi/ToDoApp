@@ -3,12 +3,10 @@ import './style.css';
 import store from './store/store.js';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
-import { StudentTable } from './studentTable';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import LoginPage from './login.js';
-import SignupPage from './signup.js';
+import LoginPage from './components/login.js';
+import SignupPage from './components/signup.js';
 import Todo from './todo/todo.js';
-
 
 export default function App() {
   return (

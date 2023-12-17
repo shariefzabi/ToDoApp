@@ -46,7 +46,10 @@ const TodoForm = () => {
                     <h1 style={{ textAlign: 'center' }}>Todos</h1>
                     <div>
                         <div style={{ textAlign: 'end' }}>
-                            <button onClick={() => saveHandler()} disabled={disableSave} className='btn btn-success mr-2'>Save</button>
+                            <button onClick={() => {
+                                saveHandler()
+                                alert('todo Saved  succesfully')
+                            }} disabled={disableSave} className='btn btn-success mr-2'>Save</button>
                             <button onClick={() => refreshHandler()} className='btn btn-primary mr-2'>refresh</button>
                         </div>
                         {

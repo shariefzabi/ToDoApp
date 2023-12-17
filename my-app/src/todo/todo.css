@@ -37,6 +37,14 @@
 }
 
 .profile {
-    color: white;
+    font-size: 35px;
+    color: black;
     margin: 0 0 0 80rem;
+    border: 1px solid white;
+    /* padding: 7px; */
+    border-radius: 50%;
+    width: 58px;
+    text-align: center;
+    background-color: #00ffd7;
+    display: inline-block;
 }

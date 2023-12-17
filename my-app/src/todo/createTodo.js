@@ -141,7 +141,6 @@ const TodoForm = () => {
                         id="priority"
                         value={priority}
                         onChange={(e) => {
-
                             setPriority(e.target.value)
                         }}
                     >

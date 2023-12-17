@@ -26,6 +26,7 @@ const TodoForm = () => {
         setTodos(newTodo)
     }
     function refreshHandler() {
+        setDisableSave(true)
         setTodos(storeTodos)
     }
     const saveHandler = useCallback(() => {

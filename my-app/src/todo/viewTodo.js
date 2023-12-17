@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './viewTodo.css'
+import { v4 as uuidv4 } from 'uuid';
 
 const TodoForm = () => {
-
-    const { currentUser } = useSelector((state) => state.userReduce);
-    const todos = useSelector((state) => state.toDoReducer)?.[currentUser]
-    console.log(todos)
+    const [disableSave, setDisableSave] = useState(true)
+    const currentUser = useSelector((state) => state.userReduce)?.currentUser;
+    const storeTodos = useSelector((state) => state?.toDoReducer)?.[currentUser]
+    const [todos, setTodos] = useState(storeTodos)
     const dispatch = useDispatch()
     const handleModalOpen = () => {
         const modal = document.getElementById('myModal');
@@ -15,38 +16,66 @@ const TodoForm = () => {
         }
         document.body.classList.add('custom-backdrop');
     };
+    const deleteHandler = (e) => {
+        const index = e.target.id.split('-index-')[1]
+        console.log('index', index)
+        const newTodo = Object.assign([], todos)
+        newTodo.splice(index, 1)
+        setDisableSave(false)
+        setTodos(newTodo)
+    }
+    function refreshHandler() {
+        setTodos(storeTodos)
+    }
+    const saveHandler = () => {
+        dispatch({ type: 'ModifyTodo', payload: { todos, currentUser } })
+    }
+    if (todos?.length > 0) {
 
-    return (
-        <div>
-            {
-                todos.map(ele => {
-                    return (
-                        <div className="todo mb-2 mt-1">
-                            <h1>taskName:{ele.task}</h1>
-                            <div style={{ textAlign: 'end' }}>
-                                <button className='btn btn-primary' onClick={handleModalOpen}>View/Edit</button>
-                                <button className='btn btn-danger'>delete</button>
-                            </div>
-                            <Modal todo={ele}></Modal>
-                        </div>
-                    )
-                })
-            }
+        return (
+            <>
+                <h1 style={{ textAlign: 'center' }}>Todos</h1>
+                <div>
+                    <div style={{ textAlign: 'end' }}>
+                        <button onClick={() => saveHandler()} disabled={disableSave} className='btn btn-success mr-2'>Save</button>
+                        <button onClick={() => refreshHandler()} className='btn btn-primary mr-2'>refresh</button>
+                    </div>
+                    {
+                        (todos.map((ele, index) => {
+                            const id = `${uuidv4()}-index-${index}`
+                            return (
+                                <div className="todo mb-2 mt-1" key={id}>
+                                    <h4>taskName:{ele.task}</h4>
+                                    <div style={{ textAlign: 'end' }}>
+                                        <button className='btn btn-primary' onClick={handleModalOpen}>View/Edit</button>
+                                        <button id={id} onClick={deleteHandler} className='btn btn-danger'>delete</button>
+                                    </div>
+                                    <Modal todo={ele}></Modal>
+                                </div>
+                            )
+                        }))
+                    }
 
-        </div>
+                </div>
+            </>
 
-    );
+        );
+    }
+    else {
+        return <h2>No Todos ,add Todos</h2>
+    }
 };
 
-const Modal = (props) => {
-    const [task, setTask] = useState('');
-    const [description, setDescription] = useState('');
-    const [dueDate, setDueDate] = useState('');
-    const [priority, setPriority] = useState('');
-    const [assignee, setAssignee] = useState('');
-    const [status, setStatus] = useState('');
-    const [notes, setNotes] = useState('');
-    const [category, setCategory] = useState('');
+const Modal = ({ todo }) => {
+    console.log('myPropss', todo)
+    const [task, setTask] = useState(todo.task);
+    const [description, setDescription] = useState(todo.description);
+    const [dueDate, setDueDate] = useState(todo.dueDate);
+    const [priority, setPriority] = useState(todo.priority);
+    const [assignee, setAssignee] = useState(todo.assignee);
+    const [status, setStatus] = useState(todo.status);
+    const [notes, setNotes] = useState(todo.notes);
+    const [category, setCategory] = useState(todo.category);
     const [errors, setErrors] = useState({
         task: '',
         description: '',

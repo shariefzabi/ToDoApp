@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 const TodoForm = () => {
-    const { currentUser } = useSelector((state) => state.userReduce);
+    const currentUser = useSelector((state) => state.userReduce)?.currentUser;
     const dispatch = useDispatch()
     const [task, setTask] = useState('');
     const [description, setDescription] = useState('');
@@ -61,6 +61,7 @@ const TodoForm = () => {
             return;
         }
         else {
+
             console.log('came')
             const todo = {
                 task,
@@ -73,6 +74,7 @@ const TodoForm = () => {
                 category
             }
             dispatch({ type: 'addTodo', payload: { todo: { [currentUser]: todo }, currentUser } })
+            alert('todo created succesfully')
         }
 
 

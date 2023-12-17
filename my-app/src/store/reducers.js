@@ -59,8 +59,10 @@ export function toDoReducer(state = todos, action) {
 
   const currentUser = action?.payload?.currentUser;
   const todo = action?.payload?.todo?.[currentUser];
-  console.log(todo)
-  console.log(state)
+  const payload = action?.payload;
+
+  console.log('todo', todo)
+  console.log('state', state)
   switch (action.type) {
 
     case 'addTodo':
@@ -75,7 +77,11 @@ export function toDoReducer(state = todos, action) {
 
         return { ...state, [currentUser]: [todo] }
       }
-
+    case 'ModifyTodo':
+      if (currentUser) {
+        return { ...state, [currentUser]: payload.todos }
+      }
+      return state
     default:
       return state;
   }

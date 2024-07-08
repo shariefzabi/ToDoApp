@@ -1,0 +1,19 @@
+difference between multi threafing and multi process
+
+Worker Thread vs. Child Process
+Worker Thread
+Definition: A worker thread is a separate thread of execution within the same process. It shares the same memory and resources as the main thread.
+Memory: Shares the same memory space with the main thread, which allows for faster data sharing but requires careful synchronization to avoid race conditions.
+Communication: Communicates directly with the main thread through shared memory, which is fast but requires mechanisms like mutexes or semaphores to avoid conflicts.
+Creation: Creating and managing threads is generally faster and less resource-intensive than creating processes.
+Use Case: Ideal for tasks that require frequent interaction with the main thread and can benefit from shared memory, such as I/O operations, handling multiple connections in a server, etc.
+
+Child Process
+Definition: A child process is a separate instance of a process, with its own memory space, which is created by the parent process.
+Memory: Has its own independent memory space, which prevents memory conflicts but makes data sharing more complex and slower due to the need for inter-process communication (IPC) mechanisms like pipes, message queues, or shared memory.
+Communication: Communicates with the parent process via IPC, which is slower compared to direct memory access used by threads.
+Creation: Creating a child process is more resource-intensive and slower than creating a thread, as it involves duplicating the process's memory space.
+Use Case: Suitable for tasks that need to be isolated from the main process or require their own memory space, such as running separate programs, handling computationally intensive tasks, or ensuring that a crash in one process does not affect the main process.
+Summary
+Worker Threads are used for lightweight tasks requiring shared memory and fast communication but need careful synchronization.
+Child Processes are used for heavier, isolated tasks requiring separate memory and more robust error isolation but involve more overhead for creation and communication.

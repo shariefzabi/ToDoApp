@@ -1,0 +1,362 @@
+ 1)what is react js
+react js is used for devolpping user intrfaces, and used the handle view page of websites and mobile apps
+it follows component base aproach,here complex user interfaces can be devolpped using reusable compoents (small pieces of codes) called 
+components, it is mostly used to devolop singlr page applications'
+
+ 2)what is virtual dom
+virtaul dom is a copy of real dom,and it is a light weight java script object it is a tree node structure which list elemenets ,attributes
+reacts render function create node tree of react components and updates this tree in responce to the data model caused by the various actions done by the 
+user and the systm
+ 
+3)what is server rendering
+server side rendering is a capabilty of a application to conevert the html files on server to rendered html pages to clients, when a wen browser request 
+informmation then the server responds with fully render pages
+(or)
+ server side rendering is a capabilty of a application to send cmpletey rendered  html pages to the clients 
+
+4)what is uni directional dat flew
+ in react js data flows only from paren components  to child componets which makes code more predictable  and debuggable
+
+5)what are advantages of react js 
+1)supports Virtula DOM
+2)component based approach
+3)one way data binding
+4)integratio with other framwors is easy
+5)with using jsx code readabilty is greatly increases
+6)developer tools
+
+6)disadavantges
+just a library and not a completed devolpped frame work
+and the library is also large
+and due to inline styling and jsx it may be diifficult to some peale to code in react js
+it may be little bit difficult for the novoice programmers to  understand
+
+7)what is jsx 
+jsx stands for java script xml 
+it consits of java script and templates similar to html
+it makes easy to devolop react components
+
+8)virtual dom
+->The virtual DOM (VDOM) is a programming concept where an ideal, or “virtual”, representation of a UI is kept in memory and synced with the “real” DOM
+virtual dom is a ligh weiht  java script object ,which is copy of real Dom
+->the DOM is a tree like structure represents html elements of a web page manipulating the real dom can be expensive and time consuming
+->the virtual dom acts like between the actual dom and the react components
+->When a react Componenets state or prop chnages the virtual dom re renders the component and creates a new virtaul dom
+->the new virtual Dom is compared with the previous virtual Dom and react finds  difference and updates need to be   applied to the actual dom toreflect the changes
+->finally react applies the minimal set of necessary chnages to the actual DOM
+
+
+
+whenever the underlying data chanes i.e (changes in the state and props) the entire dom is re-renderd to virtual dom and then the changes  
+between new and previous dom is caluculated once the caluculations are done the real dom is updates with only the thigs that are changed
+
+9)difference between real and vrtual dom
+real dom                                                                                      virtual dom
+updates entire dom when element updates                                                         updates only jsx when element changes
+updates slow                                                                                      updates fast 
+it can directly updates html                                                                       it cant direv=ckty updates html
+dom manipulation is easy                                                                           difficult
+lots of memory is wasted                                                                            no memory is wasted
+  
+
+100why cannt browsers read jsx
+  browsers can only read java script objects ,but jsx is not  a regular java script object in orderr to convert jsx to java scrpt firts
+  we have t convert jsx to java script using jsx transformer lik babel
+
+  what is jsx transform
+  1)jsx transform convert jsx to  regular java script obejcts ,without the  need of compilers 
+  2)by the latest jsx transforms we need not to import react  to convert jsx ot java script objects 
+ 3) compiled output slightly increases the bundle size'
+
+ how is differnece between of es5 and es6 using react js
+in es5 we initaialize variabe to react .createclass
+in es6 we extends class name with react,component
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+FROM SYLLABUS
+
+differenece betwwen class and functional components
+class componments :
+class components are created useing es6 clases and have additional features like state and lifecycyle methods
+
+functional components are like normal javacsript function  , here we can create state variables and create logics for different life staes of a component using hooks like useState and useEffect
+
+
+
+1)differnet ways of styling react js components
+there are total 8 different ways to style react components
+      1)inline css
+      Inline CSS: In inline styling basically we create objects of style. And render it inside the components in style attribute using the React technique to incorporate JavaScript variable inside the JSX (Using ‘{ }’ )
+
+      2)Normal CSS: In the external CSS styling technique, we basically create an external CSS file for each component and do the required styling of classes. and use those class names inside the component. It is a convention that name of the external CSS file same as the name of the component with ‘.css’ extension 
+
+      3)css with js
+      The’react-jss’ integrates JSS with react app to style components. It helps to write CSS with Javascript and allows us to describe styles in a more descriptive way. It uses javascript objects to describe styles in a declarative way using ‘createUseStyles’ method of react-jss and incorporate those styles in functional components using className attribute.
+
+      4)styled components:
+      we can create a component as a JavaScript variable that is already styled with CSS code and used that styled component in our main component. styled-components allow us to create custom reusable components which can be less of a hassle to maintain.
+
+      5)CSS Modules: A CSS module is a simple CSS file but a key difference is by default when it is imported every class name and animation inside the CSS module is scoped locally to the component that is importing it also CSS file name should follow the format ‘filename.module.css’. This allows us to use a valid name for CSS classes without worrying about conflicts with other class names in your application.
+      To use CSS modules create a normal CSS file, import the module you have created from within your component using the syntax
+ 
+2)what is jsx
+jsx is a syntax extension for java script,altouh it looks like template language it comes with full power of java script
+so insted of writing logic and markup as seperate file we can create components by combining these two by using jsx
+react dont actually need jsx bu peaple find it comfortable to use jsx  while using user interface in java script 
+
+3)what are compoents in recat js
+Components are independent and reusable piece of code that represents a pert of the Ui. They serve the same purpose as JavaScript functions and class , but work in isolation and return HTML. Components come in two types, Class components and Function components, in this tutorial we will concentrate on Function components
+ref :https://www.w3schools.com/react/react_components.asp#:~:text=Components%20are%20independent%20and%20reusable,will%20concentrate%20on%20Function%20components.
+
+4)list in react js
+list in markup language are very usefull as we can use them in building menu for web pages
+in recact we can assign elements of array to list using map function
+
+5)event handling in react js is similar to jva script ,but react evenets are named with camel case,and with jsx we can pass function as event handler rather than a string
+
+6) what is useeffect in react js
+when you call use effect you are saying to reat js to execute ypur effect function after flushing the changes to the dom,
+effects are declared inside the component in order to have the acces to the props and state , use effect will execute after each and every render including the first render
+
+7)what is state in react js 
+a)React components has a built-in state object. The state object is where you store property values that belongs to the component. When the state object changes, the component re-renders.
+ref :https://www.w3schools.com/react/react_state.asp
+
+8)what is state manipulating state in react js
+changing the state can be done in both class and function based components, in the class components we can do it by using setState function to manipulate the state anywhere in the compoennet
+in fucntion based component we can maodulfy the state using the function which will be returned by the usestate hook along with state variable , when we  call useeffect by passing initial state as a argument
+ref https://www.geeksforgeeks.org/how-to-work-with-and-manipulate-state-in-react/ 
+
+9)what is component life cycle  in react js
+a) compoenent lifecycle refers to series of methods that are invoked  at different stages of compoent existence, a react compoent can go through four stages of its life
+Initialization: This is the stage where the component is constructed with the given Props and default state. This is done in the constructor of a Component Class.
+Mounting: Mounting is the stage of rendering the JSX returned by the render method itself.
+Updating: Updating is the stage when the state of a component is updated and the application is repainted.
+Unmounting: As the name suggests Unmounting is the final step of the component lifecycle where the component is removed from the page
+ 
+mouting 
+render :this method is used to render ui based  on current state and props,renders jsx that represents compoenet view 
+constructor:  this method is used for initialisng state and binding even handlers and performing setup beofre component is mounted
+componentWillMount() : will be invoked just before the componet is about to render
+componentDidMount() : will be invoked after the component is renderd for the first time 
+componentWillReceiveProps()invoked after chnaging in props from parent component it will have acces to nestProps
+
+getDerivedtstateFromProps :this is replacement to componentWillrecieveProps and will be execueted before render to update state based on props recieved and this is static method this will recieve two input as its props nextProp previousState
+
+shouldComponentUpdate() allows developers to control the component rendering based on the change in props and state , returning false can prevent unnecessary renders it will have acces nextProps nextState
+getSnapShotBeforeUpdate : this is replacement to cmponent Will update
+
+componentWillUpdate() invoke beofre the update of the component
+componentDidUpdate() invoked after update of he component used to interact uodated Dom or performing side effects
+componentWillUnmount() invokes before component unmounts, Generally used for clean up tasks removed event listenerd clearing setTimeouts etc
+
+
+ref ;https://www.geeksforgeeks.org/reactjs-lifecycle-components/
+
+10)what  are hooks in ract js 
+a)hooks  are fucntions that let us to hook with the state and lifecycle features from a function based components,these hooks dont  works inside of the class
+
+11) what are lifecycle hooks in react js
+we use use effect hooks in order to create side effects at different stages of  lifecycle of a fucntional component,it is basicaly hook replacement for component didMount,WillUnmount,Didupdate in class based component.it accepts two parameters ,firts one to handle the logic of the effect,second one is the list  of dependencies of our side effect, along with this we can clean up the effect by returning a function in the callback function of  the useeffect
+ref:https://blog.webdevsimplified.com/2020-04/use-effect/
+https://dev.to/mpodlasin/react-useeffect-hook-explained-in-depth-on-a-simple-example-19ec
+https://dmitripavlutin.com/react-useeffect-explanation/#:~:text=useEffect(callback%2C%20dependencies)%20is,being%20props%20or%20state%20values.
+
+12) what is routing in react js
+React Router is a standard library for routing in React,It enables the navigation among views of various components in a React Application, react  router is used for  devolopping single page  web appliactions, recact router is used to define multiple routes in the appliaction,allows changing the browser URL, and keeps the UI in sync with the URL. 
+ It provides the synchronous URL on the browser with data that will be displayed on the web page
+ref :https://www.javatpoint.com/react-router#:~:text=Routing%20is%20a%20process%20in,multiple%20routes%20in%20the%20application.
+ref:https://www.geeksforgeeks.org/reactjs-router/
+
+13)what is htp request in react js
+in a typical web appliaction client or browser make the request to server and in reaponce server sends the html page along with data
+but in spa we have only one page and whenever client make request to server it generally responses with json/xml formatted data
+in react js we can make http request we can use any libarary of ajax
+XMLHTTP RESQUEST
+axios
+fetch
+ 
+among all the options axios is more easy to use while working with react js
+ref :https://www.tutorialspoint.com/making-http-request-in-react-js
+
+14)spa in react js
+a)SPA stands for Single Page Application. It is a very common way of programming websites these days. The idea is that the website loads all the HTML/JS the first time you visit. When you then navigate, the browser will only rerender the content without refreshing the website. spa is achieved internallu by using link instead of anchor tag
+ref :https://betterprogramming.pub/how-to-implement-a-single-page-application-using-react-router-cc6b9e5c3aec#:~:text=SPA%20stands%20for%20Single%20Page,content%20without%20refreshing%20the%20website.
+
+15)what is lazy loading in react
+ Most React apps will have their files “bundled” using tools like Webpack, Rollup or Browserify. Bundling is the process of following imported files and merging them into a single file: a “bundle”. This bundle can then be included on a webpage to load an entire app at once.
+
+ When this bundled project is loaded, it loads the whole source code at once, even those pages which are rarely visited by the user. So, to prevent the entire loading of the application at once, we use the concept of lazy loading to decrease the DOM load time and to increase the speed of the application.
+
+ref :https://www.tutorialspoint.com/lazy-loading-in-reactjs
+https://reactjs.org/docs/code-splitting.html
+
+16)  what is  react redux
+anatomy of Redux 
+================
+1)store 
+2)reducer 
+3)state 
+4)action 
+
+Major api involved with redux 
+================================
+createStore()
+
+important methods of store 
+=============================
+subscribe()
+dispatch()
+getState()
+
+1)store 
+    store is an object, which holds state and reducer of application
+    state of store never allowed to mutate/modify directly.
+    state of store is always modifyed by using reducer only.
+    But reducer also does not allowe to access directly.
+
+2)reducer 
+    reducer is a function, which takes 2 arguments 
+        1)state 
+        2)action  
+    It is responsible to perform the state mutation operations.
+    we are not allowed to modify the state, whith out permission of reducer.
+    it can return latest state.
+
+    (we can feel as an store operator, store manager, store monitor)
+3)state 
+    state is nothing but state of application, 
+    It might be a primitive variable, array, an object.
+    state never allowed to modify directly.
+4)action 
+    action also an object, which contains one important property.
+    That is type, which indicates action type.
+
+Major api involved with redux 
+================================
+createStore()    
+
+createStore() is used to create the store.
+To use this method, first we should import it from redux lib.
+createStore() must takes a reducer as an argument. 
+On successfull execution of createStore(), it producess a reference variable to store.
+
+
+important methods of store 
+=============================
+subscribe():
+    If we want to get the current state automatically, we shoult get subscribe().
+    This subscribe() automatically return current state, on each and every 
+    mutation/change of the state.
+dispatch()
+    It is an machanism, which allowes us to invoke actions or operations of reducer
+getState()
+    which is used to get the current state of store.
+ref :murali sir Notes
+
+
+
+what is redux saga
+a)Redux Saga is a middleware library used to allow a Redux store to interact with resources outside of itself asynchronously. This includes making HTTP requests to external services, accessing browser storage, and executing I/O operations. These operations are also known as side effects. Redux Saga helps to organize these side effects in a way that is easier to manage.
+ref :https://www.loginradius.com/blog/engineering/introduction-to-redux-saga/#:~:text=Redux%20Saga%20is%20a%20middleware,also%20known%20as%20side%20effects.
+
+what is useState in react js
+useState is a Hook (function) that allows you to have state variables in functional components. You pass the initial state to this function and it returns a variable with the current state value (not necessarily the initial state) and another function to update this value
+ref:https://blog.logrocket.com/a-guide-to-usestate-in-react-ecb9952e406c/#:~:text=useState%20is%20a%20Hook%20(function,function%20to%20update%20this%20value.
+
+
+react redux
+redux is a state management toool that provides a centarilese and predictable way to manage the state of application , redux is a state management library that stores the entire stats of application in a single object actions are dispatched to modify the state and these chnages are made by a pure function called as  reducer 
+
+react redux is a library which will connect the state managed by the redux to your react application, it provides a way to access the state and modify it by dispatching the actionsto modify the state in your react compoenents
+ 
+1)first we need to wrap our application with provider Tag, so the store can be accessed across the entire apllication , this providede tag will have a attribute called store for which we have to pass the store we have created
+
+2)the store can be created by using the create store method for which we  will pass the reducer as a argumnet, this reducer will accept two parametrs one is the state fir which we will pass the initial state, second is the action which will accept a action dispatched by a component, this reducer is a function in which we will specify what are updates and chnages should be apllied on the store 
+
+3)we can acces the store  and dipsatch the actions by defining mapStatetoProps and mapDispacthToProps
+mapStateToProps will be by default  current state of the store as its parameter and by returrning the same we can acces it the props
+mapDispatchToPropts will have a default parameter called as dispatch by returning this dispatch we canaccess this dispatch function in this.props and we can dispatch action objects {type:"",payload:{}) and can modify the state using reducer
+
+function appReducer(state = appInitialstate, action: any) {
+  switch (action.type) {
+    case "logout": {
+      return { ...state, user: null };
+    }
+ }
+}
+
+
+
+Hooks:
+useMemo
+
+it is usefull whe dealing comutationally expensive operations 
+the useMemo hook wil memoise the return value of its call back function and caches it untilll the chnages of the provided dependencies
+it will have two parameters one is the call back function and second one is array of dependencies
+it is to be whe we we need to memoise anything or else we can simply use useeffect Hook
+
+useCallback:
+it is similar to useMemo hook but it will memoise a function instead of a vlaue 
+it is usefull when passinf a function to the child copoenent as a prop 
+it accepts two parameters first one is call back function need  to be memoised and the second one is the array of dependencies
+like lets say you are crating a function isnide the component and passing it to another coponent as a parameter which rely on the reference eaquality fir re rendering   and made this function as a dependency for a useeffect hook, and you are using to set some state by retuned value of the function in the child coponent, so whenever the parent component renders, this function alos recreated and useffect hook in child component will also run aagain as the function is one of it dependency
+
+
+
+useContext hook:
+by using context we can avoid prop drilling(passing same arguments at every level of compoenet tree)
+the usecontext hook is used to consume context within a functional compoenent
+it will accept  context obejct created using the react.createContext as a  parameter and return the current context value
+
+usereducer:
+it is used to handle more complex state manipulation operation, and state logics  it will allow to use reducer for state manipulation similar to the redux
+it will accepts two parameters reducer and the initial state and gives the array of state and dispatch 
+we use dispatch to dispatch actions to the reducer based on which the reducer wil do the necesary chnages and the updated values will be relfected in the state
+ 
+UseRef
+
+how to implement component willUnmount using useeffect
+useEffect(()=>{
+return ()=>{
+clean up logic
+}
+
+},[])
+
+why we need keys in list
+keys helps he react which item has chnaged ,updated deleted from the list , therefore it can re render only the items which needs to be avoiding unnecessary renderings
+therefore by providin unique indexes for each and every item in the list can improve the perfomance
+https://www.simplilearn.com/tutorials/reactjs-tutorial/reactjs-interview-questions
+
+what is flux
+flux is a architecure pattern used  for managing data flow   in application , it is not a feature rather than it is a design philosophy ,flux is a architecture behaviour which aims for uni diectional data flow which makes state chnage and updated predictable, it typically involves components, actions,
+dispatcher, and a store usefull to modify and chnage the state in a predictible way this pattern is popularaised by facebook to build reacr  applications
+
+what are synthetic evenets 
+sysntetic events is a object which wraps native browser events to provide consistency of the behavious of this events across different browsers
+they are react way of handling events like onClcick ,onMouseHover and abstarct away the differnece browser implementations of events 
+synthtic events are similar to native events but are managed by react enabling efficient event handling and updates within virtual DOM
+
+
+interview questions for react
+1) at which stage of lifecycle we should do API calls :componentDidMount
+2) why we should pure Components or should componentUpdate
+A) generally when parent component re-renders the child component also re-renders by using the pure component or ComponetShouldUpdate method we cna prevent this re renderings as it have acces to next state and next props so we can compare them with this.props and this.state and we can return true or false
+3)different patterns used in react to structure and manage code
+	1)render props: components that accept a function as prop to share code
+	2)Hiher Order components: components that accept component as a prop and return the same by addin it more funtonalities
+	3)container components:here containers are divided into presentational and container components the container components are used to handle and 	manage logic where as presentational components are used to  
+	4) they allow to use statefull logic in react componets
+	5)context Api:allow sharing data across componnets without manually drilling at every stage
+	6)redux: a predictable javacsript container for javacsript apps 
+
+Basically theree main patterns:
+	render props
+	Context Api
+	Container pattern
+
+
+
+

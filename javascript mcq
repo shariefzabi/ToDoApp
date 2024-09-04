@@ -1,0 +1,61 @@
+ type conversion:
+ true+2 =3
+ true+1= 2
+ 1+null=2
+ 1+undefined =NAN
+ undefined+null =NAN
+ new Date()+2='2Sat Dec 02 2023 12:47:44 GMT+0530 (India Standard Time)'
+ a=[]
+ a+1 ='1'
+ b={"hii":"hello"}
+ b+2='[object Object]2'
+ priorities of type conversion string>Number>boolean
+ if anything other than this it will try to convert to string only
+
+
+Some of array methods
+ filling array :
+ a= new Array(5)
+ a.fill(0,startIndex.endingIndex)
+Array.from('hello')
+[ 'h', 'e', 'l', 'l', 'o' ]
+Array.from({length:5},(v,i)=>i) ;i=indx,v=undefined
+[ 0, 1, 2, 3, 4 ]
+get unique values inside Array
+Array.from(new Set([1,2,3])) or [...new Set([1,2,3,4])]
+
+Compare objects with Array
+Array are object whose keys are indexs and they alos provide the length of the array
+and insertion of element at a specified position is slow in array compared to object
+dedicatd loop to iterate objetc is for in looop 
+for(index key obejct){
+    console.log(key)
+}
+syntax to caluculte time consumption using console
+console.time(1)
+console.timeEnd(1)
+
+
+
+ constructor function 
+private and publiucnmehtids
+
+function hii(){
+this.hii ="hello" // public proprty
+hii= "hello"  // private property  can not accessed through instance
+
+}
+ when yoy return anything even form a constructor function it looses its capability of constructor function and behaves like normal function
+
+ 
+
+
+
+
+
+
+ 
+ 
+
+
+

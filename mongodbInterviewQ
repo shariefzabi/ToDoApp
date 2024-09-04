@@ -1,0 +1,154 @@
+	mapReduce:mapReduce is used to condense data ito usefull agregation resuts hwew we will have two things 
+to perform mapReduce operation mongodb provides mpaReduce Command
+
+this mapReduce will have two stpes 
+map:this step involves applying   a javacsriot  function to each document in the collection ,this function function processes te data in 
+each document and emit key value pairs which are further pssed to reduce step
+
+reduce:in this step  a javacscript function is applied to the emiited key vakue pairs from the previous steps , this function will 
+combine the all the values haveing same key and proceses as a single value the result of this redice is the final step of aggregation
+
+example:
+ var mapFunction =function(){
+    emit(this.department,this.salary)
+}
+var reducefunction =function(key,value){
+  return Array.sum(values)
+}
+
+db.sourceCollection.mapReduce(mapFunction,reducefunction,{out:'outut collection'})
+------------------------------------------------------------------------------------------------------------------------------------------
+mongodb replice sets:
+MongoDB replica sets are used for several important reasons in production database environments:
+ 
+1. **High Availability**: One of the primary reasons for using replica sets is to ensure high availability. By maintaining multiple copies of data across different nodes, replica sets allow your application to continue functioning even if one node (the primary) goes down. This helps prevent downtime and data unavailability.
+ 
+2. **Data Redundancy**: Replica sets provide data redundancy. Each node contains a copy of the same data, so if one node fails or becomes unavailable, there are other copies available. This redundancy minimizes data loss due to hardware failures or other issues.
+ 
+3. **Automatic Failover**: In the event of a primary node failure, replica sets can automatically elect a new primary node from the available secondaries. This automatic failover ensures that your application can continue to write to and read from the database without manual intervention.
+ 
+4. **Load Balancing**: You can distribute read operations to secondary nodes, which can help improve read performance and scalability. This can offload read traffic from the primary, allowing it to focus on write operations.
+
+ 
+Overall, MongoDB replica sets provide a robust and reliable solution for ensuring data availability, data redundancy, and high availability for your applications, making them a fundamental part of many production MongoDB deployments.
+
+----------------------------------------IMPLEMENTATION
+inorder to create mongodb replica sets we need we need three mongodb servers which can be create using mongod.cfg file by using the command mongod --config /path/t/mongod.cfg
+
+after creating the mongodb server connect to one of the mongodb instances and  run rs.initiate()
+like rs.initiate({
+    _id:myReplSet,
+    members:[
+        _id:0,host:"localhost:27017",
+        _id:0,host:"localhost:27018",
+        _id:0,host:"localhost:27019"
+    ]
+})
+we can add the other members using rs.add("localhost:27019")
+we can get configuration of replica set by using rs.config() and we can also  modify the config by assigning to to variable 
+cfg =rs.config()
+cfg.memebers[0].priority =2
+rs.reconfig(cfg)
+inorder to read the data fform secondary node connnect to that node and execute 
+rs.salveOk()
+and we can alos get the primary and current node using rs.isMaster().primary and rs.isMaster().me
+ ref :https://www.youtube.com/watch?v=vPXQyWuuc5E
+
+ ----------------------------------------------------------------------------------------------------------------------------------------
+
+mongodb sharding:
+when a single mongodb server is unable to handle large volumes of data we can create a multiple servers and distribute the data among them this process is called sharding and each mongodb server is called as a shard
+ here we can increas the availablity of the data by creating replicate sets at each shard
+ here we need to take care for choosing the shard key based on the sahrd key the mongos routers route the query to the shard key
+  disadvantages:
+  1)shards key :appropriate shard key should be chosed esle some shards may become hotspots and some shards may dont hava a single documemt
+  2)data Migration:when any one of the shard has became a hotspot the balancer needs migrate docs to another may strain cluster effects query performance
+  3)cost: as we increasing the number of mongodb servers the cost for deploying and maintenece of hardware increases
+  4)routing :as mongos routes query to different shards based on the shard key and extra layer of routing is added leads to increase of query time 
+  5)backup and restore : backing up the data is somewhat complex for a specific shard need to conside the distributuion of the data
+  6)Maintenece and Monitoring : we need monitor the status of every shard router and replica set , if any shard goes down we need to  identify to maintain cluster availabilty
+
+what is mongodb cluster
+all the resources used for implement mongodb sharding combinely we will call them as mongodb cluster
+
+----------------------------------------------------IMPLEMENTATION
+Create folders a0,a1,a2,a3, b0, b1,b2,b3, c0,c1,c2,c3, d0,d1,d2,d3 for shard servers cfg0,cfg1,cfg2,cfg3 for config servers
+
+create config servers
+mongod --configsvr --dbpath cfg0 --logpath log.cfg0 --port 27018 --replSet cfg
+dot the same for the other config servers as well
+
+now connect to anyone of tjhe config server using mongo
+and type rs.initiate()
+the current connection will become the primary node and you can add secondary nodes by using rs.add("localhost:27018")
+and you can check the replication status usimg rs.status()
+
+mongod --shardsvr --port 26000 --fork --dbpath a0 --logpath log.a0 --replset a 
+now do this for a1,a2,a3
+after that we can connect to a0 server using mongo --port 26000
+and do rs.initiaate()
+and add the other servers a1,a2,a3 to the replica set
+
+follow the same for b,c,d
+
+now we  will start mongos servers
+
+mongos configdb "cfg/localhost:27018,localhost:27019,localhost:27010" --port 23000 --logpath log.mongos2 --fork
+
+now connect to mongos instance using mongo --port 23000
+after that 
+sh.addShard("a/localhost:26000")
+do this for all the replica sets here is the replicateset and we specify only the connection of the primary node of replica set 
+now to do sharding we need t enable sharding for a database
+sh.enableSharding("dbName")
+and now we can shard the colection 
+sh.shardCollection("collection_name",{_id:1})
+here we are specifying _id as thje shardkey
+we can use db.shards.find() to find how many docs inserted in which shard 
+
+------------------------------------------------------------------------------------------------------------------------------------------iNdex es in mongodb:
+a index is  a data sctructure that stores small  and sorted set of collection data, each index consists of a set of fields of a  collection document  
+index are used to increase the query speed,  without indexes the mongodb has to scan the entire collection to fetch the data 
+
+different kind of indexes
+single Field Index:db.collection.createIndex({"field":1}) //created on a single field
+compund:db.collection.createIndex({"field1":1,"field2":1}) //created on a multiple fields
+text index :
+geospatial index
+wildcard index
+
+1)index can be added while defining the schema for a collection or can be added to a existinng collection using  method
+
+automatic indexing:mongodb by default provides index on _id field
+
+index selection : while querying the mongodbs query Planner will select the best index based upon the query  and the available indexes you can also hint a  query planner to select a prticular index
+
+useCases:
+1)increases query speed
+2)improves sorting operations
+3)uniqueness: unique indexes ensures that the values in soecified fields are unique in collection
+
+management: we can drop list view the mongodb indexes
+
+different types of indexes :
+1)single field index
+2)Compound index
+3)Multi key index : to assign index on each every of value of a array, usefull when a property is assigned woht a value of array
+4)textIndex: it indexes the text content of string fields and provode efficient text searc capabilities
+5) hashed index: it indexes the hash of field value  which helps in distriubution docs evenly across the shards 
+6) Wildcard indexes : a wildcatd index is used to apply index to all the fields or a subset of fields with  a mtchimg pattern
+7) unique index: ensure uniquness on the fields on which this index  is applied 
+sparse iNdex: usefull to aply index on docs having the indexed field, usefull for the collection where indexed fileds are not present in all the dcuments
+
+ttl index
+
+
+tradeoffs:these indexes consumes some storage space and have slight impact on write opration due to updating the indexes when documents  are inserted ,updated, deleted
+
+
+gaurisaju@instrive.in
+
+
+
+
+

@@ -1,0 +1,6 @@
+Zabi@1998
+Zabi@1998
+Zabi@1998
+Zabi@1998
+Zabi@2000
+“exact” Attribute will specify that Component should only be rendered when the URL exactly matches with the Route provided, we should avoid the exact attribute if there is nested routing for that Route

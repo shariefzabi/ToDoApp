@@ -1,0 +1,71 @@
+7)what is express js 
+Express is the most popular Node web framework and is the underlying library for a number of other popular Node web frameworks, it is used to to
+1)to write request handlers to handle request with various http verbs(get,post,put,patch) at different urls
+2)integration with view rendering engines to render templates as  a response
+3)adding middlewares at any point in request handling pipeline 
+
+what are http methods in express js
+http methods are suppied in the requetsand specifies the operation that client  has requested 
+get
+this get method request the represention of  a particular resource
+the get method has to just retrieve the data and it should not hav any other effect
+POST
+The POST method requests that the server accept the data enclosed in the request as a new object/entity of the resource identified by the URI.
+PUT
+The PUT method requests that the server accept the data enclosed in the request as a modification to existing object identified by the URI. If it does not exist then the PUT method should create one.
+DELETE
+The DELETE method requests that the server delete the specified resource. 
+
+2)what is url building in express js
+Url building involves in creatimg dynamic Url within our application. thus can be achieved using route paths , query parameters, url parameters to create Urls that points to specific routes or resources of our application
+
+To use the dynamic routes, we SHOULD provide different types of routes. Using dynamic routes allows us to pass parameters and process based on them.
+route paraments are the named url segments that are  used  to capture the values specified at their positiosn in the url, the cpatured values are populated at req.params object with the name of the parameter speified in the path as thier respective keys
+we can also use regex to restrict paramter matching
+ref:https://www.tutorialspoint.com/expressjs/expressjs_url_building.htm#:~:text=We%20can%20now%20define%20routes,and%20process%20based%20on%20them.
+ref :https://www.pabbly.com/tutorials/express-js-url-building/
+
+3) what  are middlewares in express
+ functions are functions that have access to the request object (req), the response object (res), and the next middleware function in the application’s request-response cycle. The next middleware function is commonly denoted by a variable named next.
+
+Middleware functions can perform the following tasks:
+
+Execute any code.
+Make changes to the request and the response objects.
+End the request-response cycle.
+Call the next middleware function in the stack.
+If the current middleware function does not end the request-response cycle, it must call next() to pass control to the next middleware function. Otherwise, the request will be left hanging
+
+4)what are session in express js
+a)http is stateless,in order to associate one requets to the other request,we need to store the user data between the  http request, cookies and url parameters  are used to transmit data between client and  server across http request,but they are readable at the cleint side,session are used to overcome this problem, you will assign a id to the client and it make all further request using that id, information associated with the client is stored on the server linked to that user id
+ref :https://www.tutorialspoint.com/expressjs/expressjs_sessions.htm 
+
+5)what is scaffolding
+a)scaffolding allow us to create skeleton for web application, we manullay creates our public directory,create seperate route files and add middlewares ,sacfolding setup all thses so we can direcltly start with building  our application
+ref :https://www.tutorialspoint.com/expressjs/expressjs_scaffolding.htm
+ 
+6) what is multer complete explanation
+a) uploading file option is required in most of the  websites, to perform the uploading operations in express we have  a middleware known as multer 
+
+7)routing methods in express js 
+Routing refers to how an application’s endpoints (URIs) respond to client requests. For an introduction to routing, see Basic routing.
+
+You define routing using methods of the Express app object that correspond to HTTP methods; for example, app.get() to handle GET requests and app.post to handle POST requests. For a full list, see app.METHOD. You can also use app.all() to handle all HTTP methods and app.use() to specify middleware as the callback function (See Using middleware for details).
+
+These routing methods specify a callback function (sometimes called “handler functions”) called when the application receives a request to the specified route (endpoint) and HTTP method. In other words, the application “listens” for requests that match the specified route(s) and method(s), and when it detects a match, it calls the specified callback function
+ref :https://expressjs.com/en/guide/routing.html#:~:text=A%20route%20method%20is%20derived,the%20root%20of%20the%20app.&text=Express%20supports%20methods%20that%20correspond,%2C%20post%20%2C%20and%20so%20on.
+
+8)explanation of templating in express js
+a) template engines enables us to use static template files in application ,at runtime the template engine replaces variables  with the actual values and transform template file to html file and send to client this approcah make it  easier to design the html file
+
+9)what are cookies in express js
+cookies is  a piece of informaion that is sent to the client by the server when a request is made,so everytime the user loadbacks the website the cookies are send along with the request, this helps to keep track of the users action 
+uses of the cookies  are
+1)session managemnt 
+2)keep track of the user
+3)recomendation system
+ref:https://www.tutorialspoint.com/expressjs/expressjs_cookies.htm#:~:text=Cookies%20are%20simple%2C%20small%20files,track%20of%20the%20user's%20actions.
+
+10)what is auth in  express js
+a)Authentication is a process in which the credentials provided are compared to those on file in a database of authorized users' information on a local operating system or within an authentication server. If the credentials match, the process is completed and the user is granted authorization for access. 
+ref:https://www.tutorialspoint.com/expressjs/expressjs_authentication.htm

@@ -1,0 +1,13 @@
+Routing in React js:
+	Routing  is process of creating the  sync between URI and the User Interface, It will renders different Components based on the URL provided. ReactJS Router is mainly used for developing Single Page Web Applications, In order to render different Components without reloading the Page
+To change the URL without reloading the page we will use NavLink Tag instead of Anchor tag, to avoid the reloading of the Page ,by using the NavLink tag we can easily Identify the link which is active by providing the styles in the active style attribute of the NavLink.
+Steps to create Router for React js.
+Step-1: Create a react app using npx , i.e  npx create-react-app my-app
+Step-2: install react-router-dom using NPM or Yarn , i.e : npm install react react-router-dom.
+Step-3: Import Route, NavLink, BrowserRouter  from react-router-dom in the index.js  File, which is generally  the starting point of any React Application.
+Step-4 : Create Custom Components and import  those components in the same Index.js File
+Step-5: Use the  Route  tag  to provide the Routes and the corresponding Components needs to be  rendered for the Routes provided.
+              s <Route path="/" element={<HomePage></HomePage>}></Route>
+Step-6:  create a Navigation page using Navlink tag  by providing the same Routes which are provided in the Route tag, as a result by clicking on those Links the corresponding Components will be rendered
+Alternatively we can also use Link tag, but by using NavLink tag, applying styles to the links will be easy
+Step-7: Wrap the entire Application inside the Browse router.

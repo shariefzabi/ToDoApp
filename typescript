@@ -1,0 +1,19 @@
+what  are the interfaces in typescript
+An interface is a syntactical contract that an entity should conform to
+
+An interface contains the name of all the properties along with their types. It also includes the signature for functions along with the type of arguments and return types
+Interfaces contain only the declaration of the members. It is the responsibility of the deriving class to define the members. It often helps in providing a standard structure that the deriving classes would follow
+Interfaces in TypeScript are created by using the interface keyword followed by the name of the interface, and then a {} block with the body of the interface
+ref:https://www.tutorialspoint.com/typescript/typescript_interfaces.htm#:~:text=An%20interface%20is%20a%20syntactical,the%20members%20of%20the%20interface. 
+ref :https://www.digitalocean.com/community/tutorials/how-to-use-interfaces-in-typescript
+
+what are clases in typescript
+ type script supports object oriented  features like clases and interfaces etc,a class interms of oop  represents  blueprint for a object,the class encapsulate data for a object,Typescript gives built in support for this concept called class.
+we have to use a keyword class and the classname and pair of parentheses to create a  class
+a class can contain three things 
+1)class filelds :A field is any variable declared in a class
+2)constructor :A constructor is a special function of the class that is responsible for initializing the variables of the class.
+3)methods :Functions represent actions an object can take. They are also at times referred to as methods
+to create the instance of a class we have to use new keyword followed with the className
+the new keyword is responcible for instantiation, and the constructor should be passed with values if it is parametrised 
+ref:https://www.tutorialspoint.com/typescript/typescript_classes.htm#:~:text=TypeScript%20is%20object%20oriented%20JavaScript,for%20this%20concept%20called%20class.

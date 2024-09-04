@@ -1,0 +1,144 @@
+not that much good 
+4) what is evenr emitter
+event emitter class is used to create and handle  custom events module,when an event emitter faces any error it emits an 'error' event, When a new listener is added, 'newListener' event is fired and when a listener is removed, 'removeListener' event is fired.
+Before emits any event, it must register functions(callbacks) to listen to the events.we use eventEmitter.on(event, listener) and eventEmitter.addListener(event, listener) ,similarly we can fire events using event.emit
+Multiple calls to the same event and listener will add the listener multiple times at the end of listener array and correspondingly fire multiple times
+ref :https://www.geeksforgeeks.org/node-js-eventemitter/
+ref2:https://www.tutorialspoint.com/nodejs/nodejs_event_emitter.htm
+
+8)what are buffers in node js
+Pure JavaScript, while great with unicode-encoded strings, does not handle straight binary data very well. This is fine on the browser, where most data is in the form of strings. However, Node.js servers have to also deal with TCP streams and reading and writing to the filesystem, both of which make it necessary to deal with purely binary streams of data.
+One way to handle this problem is to just use strings anyway, which is exactly what Node.js did at first. However, but at the time of dealing with TCP stream and performing a read-write operation on the file system is required to deal with pure binary data. To satisfy this need Node.js use Buffer, 
+The Buffer class in Node.js is designed to handle raw binary data. Each buffer corresponds to some raw memory allocated outside V8. Buffers act somewhat like arrays of integers, but aren't resizable and have a whole bunch of methods specifically for binary data. The integers in a buffer each represent a byte and so are limited to values from 0 to 255 inclusive. When using console.log() to print the Buffer instance, you'll get a chain of values in hexadecimal values.
+ref:https://nodejs.org/en/knowledge/advanced/buffers/how-to-use-buffers/
+ref2:https://www.geeksforgeeks.org/what-is-buffer-in-node-js/
+
+
+==========================================================================================================================================================================
+
+why we need micro service
+1) can creeate, deploy, scale , maintain the aplications independently
+2) different services can be written in different programming langues, can be deployed independenlty and can be scaled independently
+
+
+what is node js
+node js is a open source and crossplatform runtime environment for java script,It is a popular tool for almost any kind of project!,Node.js runs the V8 JavaScript engine, the core of Google Chrome outside of the browser.as a result we can run java scirpt outside of the browser, This allows Node.js to be very performant. node js app runs on a single thread without creating multiple process for every request node js provide a set of non blocking i/o primitives that prevent java script code from blocking,node js libraries are genrally written using nonblocking paradims that makes blocking behavior as exception instead of norm
+ref :https://nodejs.dev/learn
+
+Node.js runs the V8 JavaScrip
+what is npm 
+Node Package Manager (NPM) is a command line tool that installs, updates or uninstalls Node. js packages in your application. It is also an online repository for open-source Node. js packages. The node community around the world creates useful modules and publishes them as packages in this repository.
+
+2) what are cal back functions
+ A callback is just a function that's passed into another function, with the expectation that the callback will be called at the appropriate time
+a callback function is used to handle asynchronous operations when a async operation is completed the correspondin the callback function is pushhed inside the callback queue so when the callstack becomes empty after completion of all the synchronous code the eventloop can pull callbacks from callback queue and push it inside the callstack
+
+
+3) what are event loops
+event loops  allows node js to perform non blocking  i/o operations, despite the fact that javascript is single threaded, it is done by asisgning opertions to operating system whenever required 
+
+4)event emitter in mode js 
+it is a core module which allows objects to emit anf listen custom events and creates event driven mechanism as a result communication between different paerts of the application can be formed
+const evenEmitter = require("events")
+const myemiter = new evenEmitter()
+myemiter.emit("hii", args)
+myemiter.listen("hii",()=>{
+console.log("")
+})
+
+5)in node js Buffers is a built in class  provides a way to handle binary it can be used to read and write files, they store the data in various formats including Ascii UTF-8, binary encoded data
+
+key features:
+1)creating buffers
+2)manipulating data
+3)data conversion from one encding to another encoding
+4)binary operations
+	buffer allows bitwise operations such as OR
+const buffer =Buffer.from("hello")
+console.log(buffer.toString('utf8'))
+buffer.write("hii",0,2,'utf-8')
+console.log(buffer.toString('utf8'))
+
+
+
+5) what is web Module 
+web module refers to the libraries and components used to create web applications like express which simplify the process of building web servers,handling routing,managing middleware and more
+they provide a structured way to organise and handle http request, allowing developers to create robust and scalable web applications efficiently
+
+OR 
+
+a) a web server is a software which handles the http request send by the clents like webbrowser and return  webpages in responce to the clients  , usually they deliver html pages along with styles sheets,images,scripts
+most of the webbrowsers use server side scripts using scrpting languages, or redirecting the task to an applicatio server which can retrives data from database and perform logics and send resukt  to the client through the web server
+ref :https://www.tutorialspoint.com/nodejs/nodejs_web_module.htm
+
+
+6)what is restfull api
+A) RESTful API is an architectural style for an application program interface (API) that uses HTTP requests tpo perform the crud operations, the architecture requirements of restfull api are
+1)Client-Server. SystemA makes an HTTP request to a URL hosted by SystemB, which returns a response.
+2)Stateless: Servers don’t maintain client state, clients manage their own application state. The client’s requests to the server contain all the information required to process them.
+3)Cacheable: servers must mark their responses as cacheable or not. Systems and clients can cache responses when convenient to improve performance.
+4)Layered. The requesting client need not know whether it’s communicating with the actual server, a proxy, or any other intermediary.
+
+7)what is express js 
+Express is the most popular Node web framework and is the underlying library for a number of other popular Node web frameworks, it is used to to
+1)to write request handlers to handle request with various http verbs(get,post,put,patch) at different urls
+2)integration with view rendering engines to render templates as  a response
+3)adding middlewares at any point in request handling pipeline 
+
+
+
+
+9)file system in node js
+node js provide fs module to handle file operations like reading writing and deleting file ,node js gives file I/O functionalities by providing  wrapers on simple posix functions, all file system operations can have asyn and sync forms depends upon user requiremnt
+var fs = require('fs');
+Synchronous approach: They are called blocking functions as it waits for each operation to complete, only after that, it executes the next operation, hence blocking the next command from execution i.e. a command will not be executed until & unless the query has finished executing to get all the result from previous commands.
+Asynchronous approach: They are called non-blocking functions as it never waits for each operation to complete, rather it executes all operations in the first go itself. The result of each operation will be handled once the result is available i.e. each command will be executed soon after the execution of the previous command. While the previous command runs in the background and loads the result once it is finished processing the data.
+ref  :https://www.geeksforgeeks.org/node-js-file-system/
+
+10) streams in node js
+stream object is used to read data from a source and write data to a destination in a continus manner
+there are different types of streams 
+Readable − Stream which is used for read operation.
+
+Writable − Stream which is used for write operation.
+
+Duplex − Stream which can be used for both read and write operation.
+
+Transform − A type of duplex stream where the output is computed based on input.\
+ each stream is a event emitter and throws events at different instances of time
+ data :when data is available to read
+ end : when there is no data available to read
+ error:when any error occured in reading or writing data
+ finish:when all the data is completeley tranfered to destination
+
+restfull api by stack overflow
+What a RESTFUL web service/API means is that you would design your endpoint to be something human readable. For instance for each of the task described above, the standard states that it will be best to design the endpoints in such a way that each task would have its own endpoint that is descriptive enough to a human.
+ref :https://stackoverflow.com/questions/49910618/whats-the-difference-between-axios-js-and-api-restful
+
+setImmediate/clearImmediate:this is used to run a callback function after end of current eventlopp cycle
+process.nexttick:the calback in process.nextTick will eneter the callstack befre anyother callback function
+
+
+callback queues priorities: mirotask quues, timer queues, i/o hanlding,idle prepare : uses by node js for inyternal purpose, poll:  retrieves new i/o events   ,poll:  check quues, lcosin closing queues
+
+difference between rest and SOAP
+rest: 1)will allow standard http methods POST GET PATCH POST DELETE PUT and uri s to perform operations  
+2)allows different data formats like json html tets xml
+3)relies on underlying  https  for security ,and uses existing token ased authentication like jwt, Oauth 
+4) Rest is stateles by nature each equest should contain all the information required to make the request
+5) generally preferable for web servies require high performance scalabilty and flexibilty 
+6)tyoically faster and efficient because it uses json and caching fetaure of http
+
+
+
+SOAP:
+1)A protocol woth strict standars specified wrold wide web consortium for eschanging stuructered information in web services
+2)use XML exclusiverky for its message formats
+3) more complex due to strict standars, and reliance on xml schemas 
+4) has built in security features (WS-security) that provides end to end security
+5) SOAP can be statefull or stateless 
+6)slower due to xml format data transmission which requires a lot of processing power
+
+
+
+ 

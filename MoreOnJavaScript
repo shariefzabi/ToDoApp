@@ -1,0 +1,261 @@
+eventLoop: 
+event loop, a constantly running process that coordinates the tasks between the call stack and callback queue to achieve concurrency.
+
+callstack: when a function is called, it is pushed in to the  call stack and after the function execution is completed it will be  popped form the call stack.at a time only function and its children can be pushed  in the call stack
+it is basically is used by the javacscript to keep track of the function that are currently being executed
+
+callback queue: when a asynchroous operation is ready to be executed its call back function is pushed inside the callback queue so it will pushed inside the call stack once the execution of all the synchronous tasks are completed
+
+event loop: the event lopp continously checks call stack and callback queue , if the call stack is empty it will takes firts callback from the callback queue and pushes it inside the call back stack
+
+this mechanism allows the javascript to perform non blocking I/O operations by preventing the blocking of main thread by the timetaking tasks
+
+
+streams:
+By using stream we can transfer  the data in a continous fashion in the form of chunks without loading the entire data into memory
+it is very usefull while handling large data sets 
+it also reduces the latency for sending the data as we are not waiting for loading of entire data 
+these are using for real time processing 	
+
+In Node.js, you can create and work with streams to efficiently handle data, especially when dealing with large amounts of data or when reading/writing to files, network sockets, or other I/O operations. There are four fundamental types of streams in Node.js:
+ 
+1. **Readable Streams:** These streams are used for reading data. You can create a readable stream from sources like files, HTTP requests, or custom data sources. Here's how to create a simple readable stream from a string:
+ 
+   ```javascript
+   const { Readable } = require('stream');
+ 
+   const readableStream = new Readable({
+       read() {
+           this.push('Hello, World!'); // Push the data you want to read
+           this.push(null); // Signals the end of the stream
+       }
+   });
+ 
+   readableStream.pipe(process.stdout); // Pipe the data to the standard output
+   ```
+ 
+2. **Writable Streams:** These streams are used for writing data. You can create a writable stream to save data to a file or send it to an HTTP response. Here's an example of creating a writable stream to write data to a file:
+ 
+   ```javascript
+   const { Writable } = require('stream');
+   const fs = require('fs');
+ 
+   const writableStream = new Writable({
+       write(chunk, encoding, callback) {
+           fs.appendFile('output.txt', chunk, callback);
+       }
+   });
+ 
+   writableStream.write('Data to write', 'utf8', () => {
+       console.log('Data written to file.');
+   });
+   ```
+ 
+3. **Duplex Streams:** These streams can both read and write data. You can create custom duplex streams to process data in both directions. For example, you might create a duplex stream to transform data before writing it to a file.
+ 
+4. **Transform Streams:** These streams are a type of duplex stream designed for data transformation. They are often used to modify or filter data as it flows from a readable stream to a writable stream. For instance, you can use the `stream.Transform` class to create a custom transformation stream.
+ 
+Here's an example of a simple transform stream that converts input text to uppercase:
+ 
+```javascript
+const { Transform } = require('stream');
+ 
+const uppercaseTransform = new Transform({
+    transform(chunk, encoding, callback) {
+        this.push(chunk.toString().toUpperCase());
+        callback();
+    }
+});
+ 
+process.stdin.pipe(uppercaseTransform).pipe(process.stdout);
+```
+ 
+In this example, the `uppercaseTransform` stream takes input from the standard input, transforms it to uppercase, and sends it to the standard output.
+ 
+These are the basics of creating and using streams in Node.js. Streams are a powerful way to work with data efficiently, especially for tasks that involve I/O operations, data processing, or real-time data handling.
+
+
+
+
+Global Object 
+similar to windows object in browser used in javascript global object is used to access global properties and methods like(setTimeout and setTimeInterval)
+and we can attach custom properties or  variable sto the global object as well, making them available in our entire node js application ,how it is best paravtice to use module level variable and export and import them in order make them available in other modules
+
+global.MyGlobalVariable ="hello world"(exmaple  to attach custome variable to global object)
+
+how there are some use cases of global object but it is not suggested to add more properties on global level and pollute global scope whih may leads to naming convention instead of that we should go with module-level variables
+
+events in node js 
+In Node.js, events are a fundamental concept used to handle asynchronous operations. They are part of the core Node.js architecture 
+we can assume events are triggering points for a logic or a predefined functionality, so when a event occurs the corresponding the eventhandler can be executed, this allows us to create aynchronous event driven applications and can also create communication between different  parts of the application   
+custom events can be created using events class
+and are typically implemented using the events class, which allows objects to emit and listen for events.
+ 
+Here's how events work in Node.js:
+ 
+1. events: The events is a built-in Node.js module that provides an event-driven architecture. You can create your custom event emitters by extending this class.
+ 
+2. Event Emitter Methods:
+   - `on` or `addListener`: These methods are used to attach event listeners to specific events. When an event is emitted, the associated listeners are called.
+ 
+   - `emit`: This method is used to emit an event, triggering the execution of all associated event listeners.
+ 
+   - `once`: This method attaches an event listener that will only be called once for the specified event.
+ 
+   - `removeListener`: It is used to remove a specific event listener.
+ 
+3. Example:
+   ```javascript
+   const EventEmitter = require('events');
+   const myEmitter = new EventEmitter();
+ 
+   myEmitter.on('customEvent', (message) => {
+       console.log(`Received message: ${message}`);
+   });
+ 
+   myEmitter.emit('customEvent', 'Hello, world!');
+   ```
+ 
+In the example above, when `myEmitter` emits the 'customEvent' event, the listener attached to it logs the message to the console.
+ 
+Events are commonly used for building various types of applications in Node.js, such as web servers, file I/O, and handling user interactions in a non-blocking and asynchronous manner.
+
+prototype :
+the prototype object of a object represents it access to the  properties and methods of other object
+prototype chaining:
+Prototype chaining is a mechanism in JavaScript that allows objects to inherit properties and methods from other objects
+every obejct has a built in object called as prototype
+the prototyoe is itself a object so it has its own prototype and this process will continues untill a prototype having a null as its prototype
+if the object doesnt have a property or metods the javascript will looks up in prototype chain
+ex:when we crared a array it has prototype of Array and the Array itself a object so it will have prototype of Obejct
+ 
+
+different between call apply and bind
+
+//call
+by using this we can assign the object to targeted function this by poassing it as the first paramter and we can the pass the argumnets as remaini g parameters
+
+function hello (param1){
+  return param1+this.count;
+}
+ console.log(hello.call({count:2},5))
+
+//apply
+similar to call but can pass the array argument as the prameter the apply will spread them for us
+
+function hello (param1){
+  return param1+this.count
+}
+console.log(hello.apply({count:5},[6]))
+
+//bind
+
+by using this we can assign the object to targeted function this by poassing it as the first paramter and we can the pass the argumnets as remaini g parameters
+
+here the function eill not be called immidiately after we bind the function with the obejct insted it will return a bount function which we can later as well by pasisng the addditional parameters as well
+ 
+function hello (param1){
+  return param1+this.count
+}
+ newfn=hello.bind({count:5})
+ console.log(newfn(5))
+
+
+differnece between arrow function and normal funcion
+arrow function : 1)this was introduced in es6  and will not have its own this context intead inherti this from its lexical scope            
+                  2) can not be used to create construcotr functions
+		3) dont have acces to arguments object hence spread and rest are introduced in es6
+normal functions :1)have its own this context
+		  2)can be used to create constructor functions
+                 3) have acces to arguments object
+
+
+built in modules in node js
+1) events
+2)fs
+3)path
+4)buffer
+5)child process
+6)Worker Threads
+7)cluster
+8)stream
+9)path
+10)HTTP
+11) url
+
+what are all the features intorided in es6
+1) let and const declaration
+2) claasses
+3) spread and res parameter
+4) default parameters to functions
+5) object desctrucring
+6)Arrow functions
+7)template literals
+8) object literals
+9)Promises
+10) Array and objec method
+11) map Set Weak map and Weak set
+12) generators and iterators
+13)Modules
+14)symbol
+15) binaey and Octet number formats
+
+
+
+Message queues
+1)message prioritisation: allow us to prorotise message allows to process critical message firts
+2)message queuing: stores message in fifo order , so the message can be processed in the order they have senr
+3) message persistence: store the message on the disk in order to avoid loss of messages during system failures
+4) scaling
+	1)the messages can be distributed to all the available consumer and therby by indice load balancing
+         2) provide flexibilty to scale consumer and prodicers horizontallly
+5) fault tolerance: allows retyr mechanism to delever the messages
+                     the message which can not be processed after a prtiuclar retries are stored so they can be reviewd later
+6) security : provode flexibilty to encrypt message in transit and rest as well
+              allows only authenticated client to delever and cosume message
+7) delay delivery : allows messages to be delivered wuth some delay suitable for delayed worflows
+8) asynchroous communication :1)make nodes completely independent of each other as they need to wait for the response of others
+	2) messages can be processed and delevered without blocking the event loopas as kafka supports streaming
+9) publisher and subscriber: allows pub sib model so the messagw can ve published to a topic and delevered to multiple cinsumers
+   2) usefull for bradcasting veent to multiple services
+
+10) monitoring and management :1) merics and logging  provide tools to monitor quque usage , view messages, message throughput, prpcessing times, managing queues, message stattstics, managing queue , configurong settings
+
+Apache kafka:
+1)message queuing: stores message in fifo order , so the message can be processed in the order they have senr
+2) message persistemce: message are stored on the specified topic in order to avoild message loss during syste failures
+3) load balancing: message will be disributed in kafka by allocation a subset of partitons to a consumer which are assigned to same consumer group
+    2)provodes flexibilty to scele  producers and consumers horizontally
+4) asynchronous comunnication: allows to decouple nodes as they need not t depend on the response of each other 
+                               2) Kafka supports sending and recieving data in the form of streams so the vent lopp wont be blocked
+5) pub/sub model:
+
+6) fault tolerance:
+1)kafka allows retry mechanism to send message to a particlar topic
+kafka supports replication of topics across different brokers,each partion of a kafak topic will have one leader and multiple followers , if leader is donw one of follwers will be made as leader by the zookeper, the leader only reads and writes the data and followers simply repliacte the data
+each topic can be configured with replication factor which specifies how many copies of data need to stored
+2) kafka producer will waist from the acknowledge of all the servers before considering message is sent sucesfully sent
+3) kafka tracks the offset of messages consumed by each consumer group, this infrmation is stored in seperate topic so the consumer can start form wherever they have have stopeed previous  during the time of failures
+  
+
+7)security
+8) monitoring and management
+9)
+
+
+graphql:
+schemas : specifies about the structure of  graph to the express-graphql
+
+
+
+
+    
+
+
+
+
+
+    
+
+
+  

@@ -1,0 +1,29 @@
+const last = (arr: Array<number>): Number => {
+    return arr.length - 1
+
+}
+const last1 = (arr: Array<String | any>): Number => {
+    return arr.length - 1
+
+}
+const last2 = <T>(arr: T[]) => {
+    return arr.length - 1
+
+}
+const last3 = <X, Y>(x: X, y: Y):String => {
+    return x+""+y
+     
+ }
+const myAtr = last([1, 2, 3, 4])
+console.log(myAtr)
+
+const myanyAtr = last1([1, 2, 3, 4])
+console.log(myanyAtr)
+
+const myGenAtr = last2([1, 2, 4, 4])
+console.log(myGenAtr)
+
+const Gen2ele = last3<String, String>("hii", "bye")
+console.log(Gen2ele)
+
+export {}

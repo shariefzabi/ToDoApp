@@ -1,0 +1,170 @@
+var employees = [];
+        function init() {
+            getData();
+        }
+        function getData() {
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function () {
+                var dataList = xmlhttp.responseText;
+                // console.log(dataList);
+                employees = JSON.parse(dataList);
+                console.log(employees);
+                gridInit();
+                tableInit();
+            }
+            xmlhttp.open("GET", "./assets/json/employees.json");
+            xmlhttp.send();
+        }
+        function tableInit() {
+            let table_containerElement = document.getElementById("tablebody");
+            var table_items = ``;
+            for (let employee of employees) {
+                table_items += `
+                                 <tr id="table-item-${employee.id}">
+                                    <td class="table_items">${employee.name} </td>
+                                    <td class="table_items">${employee.id} </td>
+                                    <td class="table_items">${employee.skills} </td>
+                                    <td class="table_items">${employee.project} </td>
+                                    <td class="table_items">${employee.hcm} </td>
+                                    <td class="table_items"><img id ="list-edit-img" class ="edit-icon2" src="./assets/img/edit.png" alt="" onclick ="listCardEditHandler(${employee.id})"><p class ="del_icon2" onclick ="deleteHandler(${employee.id})">X</p></td>
+                                   
+                                </tr>
+                 `
+            }
+            table_containerElement.innerHTML = table_items;
+        }
+
+        function gridInit() {
+            var grid_container = document.getElementById("grid_container");
+            var grid_items = ``;
+            for (let employee of employees) {
+                grid_items += `
+                                    <div class="grid-item" id="grid-item-${employee.id}">
+                                        <span style='font-size:30px;' class="del_icon" onclick="deleteHandler(${employee.id})">X</span>
+                                        <img src="${employee.img_path}" alt="">
+                                        <p> Name: ${employee.name}</p>
+                                        <p> Id: ${employee.id}</p>
+                                        
+                                        <p>Skills : ${employee.skills}</p>
+                                        <p>Project : ${employee.project}</p>
+                                        <p>Hcm : ${employee.hcm}</p>
+                                        <div class="grid-edit-container"><a class ="edit-icon" href="#" onclick="gridCardEditHandler(${employee.id})">Edit</a></div>
+                                    </div>
+                                `
+            }
+            // grid_container.innerText = "Hi"
+            grid_container.innerHTML = grid_items;
+
+        }
+        function deleteHandler(id) {
+            // alert(id)
+            employees = employees.filter((employee) => { return employee.id != id });
+            gridInit();
+            tableInit();
+        }
+        function saveSkikk(id, new_skill) {
+        }
+        function listCardEditHandler(id) {
+            var listId = 'table-item-' + id;
+            //alert(listId)
+            var list_cardItem = document.getElementById(listId);
+            console.log(list_cardItem);
+            var img1 = list_cardItem.getElementsByTagName("img")[0];
+            console.log(img1);
+            if (img1.src.includes("edit")) {
+                img1.src = "./assets/img/save.jpg";
+                var nameEl = list_cardItem.getElementsByTagName("td")[2];
+                console.log(nameEl);
+                var employee = employees.find((employee) => {
+                    // console.log("edi=", eid, " id=", id);
+                    return employee.id == id;
+                });
+                console.log(employee);
+                nameEl.innerHTML = `
+        <input type='text' autofocus value='${employee.skills}'>
+
+    `
+                var inputEl = nameEl.getElementsByTagName("input")[0];
+                inputEl.focus();
+            }
+            else if (img1.src.includes("save")) {
+                img1.src = "./assets/img/edit.png"
+                var nameEl = list_cardItem.getElementsByTagName("td")[2];
+                console.log(nameEl);
+                var employee = employees.find((employee) => {
+                    // console.log("edi=", eid, " id=", id);
+                    return employee.id == id;
+                });
+                console.log(employee);
+                var inputEl = nameEl.getElementsByTagName("input")[0];
+                employee.skills = inputEl.value;
+                nameEl.innerHTML = ` ${employee.skills}
+
+`
+            }
+            gridInit();            
+        }
+        function gridCardEditHandler(id) {
+
+            var itemId = 'grid-item-' + id;
+            // alert(itemId);
+            var cardItem = document.getElementById(itemId);
+            console.log(cardItem);
+            var editEl = cardItem.getElementsByTagName("a")[0];
+            console.log(editEl);
+            var label = editEl.innerText;
+            if (label == "Edit") {
+                editEl.innerText = 'Save';
+                var nameEl = cardItem.getElementsByTagName("p")[2];
+                console.log(nameEl);
+                var employee = employees.find((employee) => {
+                    // console.log("edi=", eid, " id=", id);
+                    return employee.id == id;
+                });
+                console.log(employee);
+                nameEl.innerHTML = `Skills: 
+                    <input type='text' autofocus value='${employee.skills}'>
+                `
+                var inputEl = nameEl.getElementsByTagName("input")[0];
+                inputEl.focus();
+            } else if (label == "Save") {
+                editEl.innerText = 'Edit';
+                var nameEl = cardItem.getElementsByTagName("p")[2];
+                console.log(nameEl);
+                var employee = employees.find((employee) => {
+                    // console.log("edi=", eid, " id=", id);
+                    return employee.id == id;
+                });
+                console.log(employee);
+                var inputEl = nameEl.getElementsByTagName("input")[0];
+                employee.skills = inputEl.value;
+                nameEl.innerHTML = `skills: ${employee.skills}
+                `
+            }
+            tableInit();
+        }
+        var toggler_button = true;
+        function toggler() {
+            var input1 = document.getElementById("grid_container");
+
+            if (toggler_button) {
+                input1.style.display = 'none';
+                toggler_button = false;
+            }
+            else {
+                input1.style.display = 'inline-grid';
+                toggler_button = true;
+            }
+        }
+        function toggler2() {
+            var input1 = document.getElementById("tableContainer");
+
+            if (toggler_button) {
+                input1.style.display = 'none';
+                toggler_button = false;
+            }
+            else {
+                input1.style.display = 'block';
+                toggler_button = true;
+            }
+        }

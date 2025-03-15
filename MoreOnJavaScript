@@ -232,7 +232,7 @@ Apache kafka:
 
 6) fault tolerance:
 1)kafka allows retry mechanism to send message to a particlar topic
-kafka supports replication of topics across different brokers,each partion of a kafak topic will have one leader and multiple followers , if leader is donw one of follwers will be made as leader by the zookeper, the leader only reads and writes the data and followers simply repliacte the data
+kafka supports replication of topics across different brokers,every topic can have multiple partitions, each partition of a kafak topics across diffeent brokers will have one leader and multiple followers , if leader is donw one of follwers will be made as leader by the zookeper, the leader only reads and writes the data and followers simply repliacte the data
 each topic can be configured with replication factor which specifies how many copies of data need to stored
 2) kafka producer will waist from the acknowledge of all the servers before considering message is sent sucesfully sent
 3) kafka tracks the offset of messages consumed by each consumer group, this infrmation is stored in seperate topic so the consumer can start form wherever they have have stopeed previous  during the time of failures

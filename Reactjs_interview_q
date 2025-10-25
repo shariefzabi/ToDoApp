@@ -45,6 +45,9 @@ virtual dom is a ligh weiht  java script object ,which is copy of real Dom
 ->the new virtual Dom is compared with the previous virtual Dom and react finds  difference and updates need to be   applied to the actual dom toreflect the changes
 ->finally react applies the minimal set of necessary chnages to the actual DOM
 
+or 
+The Virtual DOM (VDOM) is a lightweight JavaScript representation of the real DOM. It helps optimize UI updates by minimizing direct manipulations of the actual DOM. When a component's state or props change, React updates the Virtual DOM, compares it with the previous version (diffing), and applies only the necessary changes to the real DOM efficiently. This improves performance and ensures smooth rendering
+
 
 
 whenever the underlying data chanes i.e (changes in the state and props) the entire dom is re-renderd to virtual dom and then the changes  
@@ -67,6 +70,16 @@ lots of memory is wasted                                                        
   1)jsx transform convert jsx to  regular java script obejcts ,without the  need of compilers 
   2)by the latest jsx transforms we need not to import react  to convert jsx ot java script objects 
  3) compiled output slightly increases the bundle size'
+   
+   or 
+JSX Transform is a process that converts JSX code into regular JavaScript objects that browsers can understand. It eliminates the need for manual compilation and enables JSX to work seamlessly in JavaScript environments.
+
+Key Points:
+JSX Transform converts JSX into JavaScript without requiring additional compilers.
+
+With the latest JSX transform, importing React is no longer necessary to use JSX.
+
+The compiled output slightly increases the bundle size, but modern optimizations help minimize its impact
 
  how is differnece between of es5 and es6 using react js
 in es5 we initaialize variabe to react .createclass
@@ -115,7 +128,7 @@ in recact we can assign elements of array to list using map function
 
 5)event handling in react js is similar to jva script ,but react evenets are named with camel case,and with jsx we can pass function as event handler rather than a string
 
-6) what is useeffect in react js
+1) what is useeffect in react js
 when you call use effect you are saying to reat js to execute ypur effect function after flushing the changes to the dom,
 effects are declared inside the component in order to have the acces to the props and state , use effect will execute after each and every render including the first render
 
@@ -162,6 +175,128 @@ we use use effect hooks in order to create side effects at different stages of  
 ref:https://blog.webdevsimplified.com/2020-04/use-effect/
 https://dev.to/mpodlasin/react-useeffect-hook-explained-in-depth-on-a-simple-example-19ec
 https://dmitripavlutin.com/react-useeffect-explanation/#:~:text=useEffect(callback%2C%20dependencies)%20is,being%20props%20or%20state%20values.
+
+Characteristics of useEffect Hook and When It Renders
+The useEffect hook runs at different times based on the provided dependency array. Here’s a breakdown of when and how useEffect renders based on the different configurations:
+
+1. No Dependency Array (Runs After Every Render)
+When it runs: After every render (initial mount and every subsequent update).
+
+Use case: You need to run the effect on every render, regardless of the state or props changes.
+
+javascript
+Copy
+Edit
+useEffect(() => {
+  console.log('Effect runs after every render');
+});
+Characteristics:
+
+This is similar to componentDidUpdate in class components.
+
+The effect will re-run every time the component renders, whether due to state, props, or parent re-render.
+
+2. Empty Dependency Array ([]) (Runs Once After Initial Mount)
+When it runs: Only once, right after the component mounts (similar to componentDidMount in class components).
+
+Use case: You need to perform the effect only once after the initial render (e.g., fetch data, set up event listeners, etc.).
+
+javascript
+Copy
+Edit
+useEffect(() => {
+  console.log('Effect runs once after the initial mount');
+}, []);
+Characteristics:
+
+The effect is not re-run on state or prop changes.
+
+The cleanup function (if provided) will be called when the component unmounts.
+
+3. Dependency Array with Specific Dependencies ([dep1, dep2])
+When it runs: After the initial render and whenever one of the values in the dependency array changes.
+
+Use case: You want to run the effect only when specific state or props change.
+
+javascript
+Copy
+Edit
+useEffect(() => {
+  console.log('Effect runs when count changes');
+}, [count]); // Runs when count changes
+Characteristics:
+
+React compares the current and previous values of the dependencies, and if there is a change, it re-runs the effect.
+
+If the dependencies remain the same between renders, React will skip the effect to optimize performance.
+
+4. Cleanup Function and Dependency Array
+When it runs: The cleanup function runs before the effect re-runs or when the component unmounts. This is useful for clearing up resources (e.g., timers, event listeners).
+
+Use case: When you need to clean up resources or cancel side effects before the component unmounts or before the next effect runs.
+
+javascript
+Copy
+Edit
+useEffect(() => {
+  const timer = setTimeout(() => {
+    console.log('Timer ran');
+  }, 1000);
+  
+  // Cleanup function
+  return () => {
+    clearTimeout(timer); // Clean up the timer
+    console.log('Cleanup before the next effect or unmount');
+  };
+}, [count]); // Runs every time count changes and cleans up the previous timer
+Characteristics:
+
+The cleanup function will run:
+
+Before the next effect (if the dependencies change).
+
+On unmount (if the component is removed from the UI).
+
+5. When the Component Unmounts (With Cleanup Function)
+When it runs: The cleanup function in useEffect runs when the component unmounts or before the effect runs again (if the dependencies change).
+
+Use case: You want to clear side effects when the component is removed or before running a new effect.
+
+javascript
+Copy
+Edit
+useEffect(() => {
+  console.log('Effect runs on mount');
+  
+  return () => {
+    console.log('Cleanup before unmount');
+  };
+}, []);
+Characteristics:
+
+This is equivalent to componentWillUnmount in class components.
+
+Cleanup happens only if there’s a cleanup function in the effect.
+
+Summary of When useEffect Runs:
+No dependency array: Runs after every render.
+
+Empty dependency array ([]): Runs only once after the initial render.
+
+With dependencies ([dep1, dep2]): Runs after the initial render and when any dependency changes.
+
+Cleanup function: Runs before the effect re-runs or when the component unmounts.
+
+Let me know if you'd like more clarification or examples on any specific scenario!
+
+
+
+
+
+
+
+
+
 
 12) what is routing in react js
 React Router is a standard library for routing in React,It enables the navigation among views of various components in a React Application, react  router is used for  devolopping single page  web appliactions, recact router is used to define multiple routes in the appliaction,allows changing the browser URL, and keeps the UI in sync with the URL. 
@@ -263,6 +398,10 @@ ref :https://www.loginradius.com/blog/engineering/introduction-to-redux-saga/#:~
 
 what is useState in react js
 useState is a Hook (function) that allows you to have state variables in functional components. You pass the initial state to this function and it returns a variable with the current state value (not necessarily the initial state) and another function to update this value
+
+OR 
+"useState is basically a Hook to manage state in a React application. When you call this Hook with an initial value, it returns an array of two elements: the first element holds the state, and the second one is a function to update the state."
+
 ref:https://blog.logrocket.com/a-guide-to-usestate-in-react-ecb9952e406c/#:~:text=useState%20is%20a%20Hook%20(function,function%20to%20update%20this%20value.
 
 
